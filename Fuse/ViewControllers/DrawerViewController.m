@@ -9,15 +9,21 @@
 #import "DrawerViewController.h"
 #import "AppDelegate.h"
 #import <MMDrawerBarButtonItem.h>
+#import "SearchViewController.h"
+#import "PlaylistViewController.h"
 
 @interface DrawerViewController ()
-
+{
+    int selectedRow;
+}
 @end
 
 @implementation DrawerViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    selectedRow = 2;
     
     _tableView.dataSource = self;
     _tableView.delegate = self;
@@ -68,6 +74,31 @@
 #pragma mark - UITableViewDelegate
 
 - (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    if(indexPath.row != selectedRow){
+        [tableView deselectRowAtIndexPath:[NSIndexPath indexPathForRow:selectedRow inSection:0] animated:YES];
+        selectedRow = indexPath.row;
+        
+        UIViewController *viewController;
+        switch(indexPath.row){
+            case 0:
+                
+                break;
+            case 1:
+                viewController = [[SearchViewController alloc] initWithNibName:@"SearchViewController" bundle:nil];
+                break;
+            case 2:
+                viewController = [[PlaylistViewController alloc] initWithNibName:@"PlaylistViewController" bundle:nil];
+                break;
+            case 3:
+                break;
+        }
+        
+        UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:viewController];
+        ((AppDelegate *)[[UIApplication sharedApplication] delegate]).drawerController.centerViewController = nav;
+    }
+    
+    [((AppDelegate *)[[UIApplication sharedApplication] delegate]).drawerController closeDrawerAnimated:YES completion:nil];
 }
 
 @end

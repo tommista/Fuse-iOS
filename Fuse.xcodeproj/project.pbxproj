@@ -19,6 +19,8 @@
 		0B7ED8631BAD149B002F4DAC /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0B7ED8621BAD149B002F4DAC /* AVFoundation.framework */; };
 		0B7ED8651BAD14AB002F4DAC /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0B7ED8641BAD14AB002F4DAC /* SystemConfiguration.framework */; };
 		0B7ED86A1BAD18D7002F4DAC /* SpotifyPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B7ED8691BAD18D7002F4DAC /* SpotifyPlayer.m */; };
+		0B7ED86E1BAD1CF7002F4DAC /* SearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B7ED86C1BAD1CF7002F4DAC /* SearchViewController.m */; };
+		0B7ED86F1BAD1CF7002F4DAC /* SearchViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0B7ED86D1BAD1CF7002F4DAC /* SearchViewController.xib */; };
 		3E6BA756BD48AF08C53EA63D /* libPods-Fuse.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 907CFF891CCBC3679EC4B3D0 /* libPods-Fuse.a */; };
 /* End PBXBuildFile section */
 
@@ -55,6 +57,9 @@
 		0B7ED8661BAD15CE002F4DAC /* Secrets.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Secrets.h; sourceTree = "<group>"; };
 		0B7ED8681BAD18D7002F4DAC /* SpotifyPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SpotifyPlayer.h; path = Players/SpotifyPlayer.h; sourceTree = "<group>"; };
 		0B7ED8691BAD18D7002F4DAC /* SpotifyPlayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SpotifyPlayer.m; path = Players/SpotifyPlayer.m; sourceTree = "<group>"; };
+		0B7ED86B1BAD1CF7002F4DAC /* SearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SearchViewController.h; path = ViewControllers/SearchViewController.h; sourceTree = "<group>"; };
+		0B7ED86C1BAD1CF7002F4DAC /* SearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SearchViewController.m; path = ViewControllers/SearchViewController.m; sourceTree = "<group>"; };
+		0B7ED86D1BAD1CF7002F4DAC /* SearchViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SearchViewController.xib; path = ViewControllers/SearchViewController.xib; sourceTree = "<group>"; };
 		907CFF891CCBC3679EC4B3D0 /* libPods-Fuse.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Fuse.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BEC5EAEA39425EBCC1D0691C /* Pods-Fuse.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Fuse.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Fuse/Pods-Fuse.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -104,6 +109,7 @@
 		0B462A4D1BACE69700B65D51 /* Fuse */ = {
 			isa = PBXGroup;
 			children = (
+				0B7ED8701BAD21B4002F4DAC /* Models */,
 				0B7ED8671BAD18BA002F4DAC /* Players */,
 				0B7ED85A1BACF520002F4DAC /* ViewControllers */,
 				0B462A521BACE69700B65D51 /* AppDelegate.h */,
@@ -150,6 +156,9 @@
 				0B7ED85B1BAD041D002F4DAC /* PlaylistViewController.h */,
 				0B7ED85C1BAD041D002F4DAC /* PlaylistViewController.m */,
 				0B7ED85D1BAD041D002F4DAC /* PlaylistViewController.xib */,
+				0B7ED86B1BAD1CF7002F4DAC /* SearchViewController.h */,
+				0B7ED86C1BAD1CF7002F4DAC /* SearchViewController.m */,
+				0B7ED86D1BAD1CF7002F4DAC /* SearchViewController.xib */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -161,6 +170,13 @@
 				0B7ED8691BAD18D7002F4DAC /* SpotifyPlayer.m */,
 			);
 			name = Players;
+			sourceTree = "<group>";
+		};
+		0B7ED8701BAD21B4002F4DAC /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Models;
 			sourceTree = "<group>";
 		};
 		5718902496E4812ACDEA7532 /* Pods */ = {
@@ -267,6 +283,7 @@
 			files = (
 				0B7ED85F1BAD041D002F4DAC /* PlaylistViewController.xib in Resources */,
 				0B7ED8591BACF254002F4DAC /* DrawerViewController.xib in Resources */,
+				0B7ED86F1BAD1CF7002F4DAC /* SearchViewController.xib in Resources */,
 				0B462A5C1BACE69700B65D51 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -322,6 +339,7 @@
 				0B7ED8581BACF254002F4DAC /* DrawerViewController.m in Sources */,
 				0B7ED86A1BAD18D7002F4DAC /* SpotifyPlayer.m in Sources */,
 				0B462A541BACE69700B65D51 /* AppDelegate.m in Sources */,
+				0B7ED86E1BAD1CF7002F4DAC /* SearchViewController.m in Sources */,
 				0B462A511BACE69700B65D51 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -7,6 +7,8 @@
 //
 
 #import "DrawerViewController.h"
+#import "AppDelegate.h"
+#import <MMDrawerBarButtonItem.h>
 
 @interface DrawerViewController ()
 
@@ -19,6 +21,7 @@
     
     _tableView.dataSource = self;
     _tableView.delegate = self;
+    [_tableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:2 inSection:0] animated:YES scrollPosition:UITableViewScrollPositionNone];
 }
 
 #pragma mark - UITableViewDataSource
@@ -65,7 +68,6 @@
 #pragma mark - UITableViewDelegate
 
 - (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
 @end

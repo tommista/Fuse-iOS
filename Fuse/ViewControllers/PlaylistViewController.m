@@ -7,6 +7,8 @@
 //
 
 #import "PlaylistViewController.h"
+#import "AppDelegate.h"
+#import <MMDrawerBarButtonItem.h>
 
 @interface PlaylistViewController ()
 
@@ -19,6 +21,20 @@
     
     _tableView.dataSource = self;
     _tableView.delegate = self;
+    _tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
+    
+    self.navigationItem.leftBarButtonItem = [[MMDrawerBarButtonItem alloc] initWithTarget:self action:@selector(menuButtonPressed:)];
+}
+
+#pragma mark - Actions
+
+- (IBAction) menuButtonPressed:(id)sender{
+    if([((AppDelegate *)[[UIApplication sharedApplication] delegate]).drawerController openSide] == MMDrawerSideNone){
+        [((AppDelegate *)[[UIApplication sharedApplication] delegate]).drawerController openDrawerSide:MMDrawerSideLeft animated:YES completion:nil];
+    }
+    else{
+        [((AppDelegate *)[[UIApplication sharedApplication] delegate]).drawerController closeDrawerAnimated:YES completion:nil];
+    }
 }
 
 #pragma mark - UITableViewDataSource

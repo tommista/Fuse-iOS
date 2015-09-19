@@ -10,6 +10,8 @@
 #import "SpotifyPlayer.h"
 #import "SoundcloudPlayer.h"
 
+#define SONG_INDEX_NOTIFICATION @"song_index_notif"
+
 @interface SongManager : NSObject <AVAudioPlayerDelegate, SPTAudioStreamingPlaybackDelegate>
 
 @property (strong, nonatomic) SpotifyPlayer *spotifyPlayer;
@@ -23,5 +25,6 @@
 - (void) nextSong;
 - (void) previousSong;
 - (void) startTimer;
+- (unsigned long) getPlayingIndex;
 
 @end

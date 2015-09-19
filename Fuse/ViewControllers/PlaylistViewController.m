@@ -13,10 +13,12 @@
 #import <AVFoundation/AVFoundation.h>
 #import "SongManager.h"
 #import "SoundcloudTrack.h"
+#import <SDWebImage/UIImageView+WebCache.h>
 
 @interface PlaylistViewController ()
 {
     NSArray *playlist;
+    unsigned long selectedRow;
 }
 @end
 
@@ -90,18 +92,18 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
     
     if(cell == nil){
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:cellIdentifier];
     }
     
     id track = [_savedPlaylistManager.savedPlaylist objectAtIndex:indexPath.row];
     if([[track class] isSubclassOfClass:[SPTPartialTrack class]]){// spotify track
         SPTPartialTrack *spTrack = (SPTPartialTrack *) track;
-        NSLog(@"sptrack: %@", spTrack);
         cell.textLabel.text = spTrack.name;
+        cell.detailTextLabel.text = [spTrack.artists[0] name];
     }else if ([[track class] isSubclassOfClass:[SoundcloudTrack class]]){// soundcloud track
         SoundcloudTrack *scTrack = (SoundcloudTrack *) track;
-        NSLog(@"sctrack: %@", scTrack);
         cell.textLabel.text = scTrack.trackName;
+        cell.detailTextLabel.text = scTrack.artistName;
     }else{
         cell.textLabel.text = @"TBD";
     }
@@ -120,7 +122,7 @@
 #pragma mark - UITableViewDelegate
 
 - (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    selectedRow = indexPath.row;
     [_songManager setCurrentPlaylist:[_savedPlaylistManager savedPlaylist]];
     [_songManager startTimer];
     [_songManager playSongAtIndex:indexPath.row];

@@ -54,6 +54,8 @@
     
     [self pause];
     
+    [[NSNotificationCenter defaultCenter] postNotificationName:SONG_INDEX_NOTIFICATION object:nil userInfo:@{@"index" : [NSNumber numberWithLong:playingIndex]}];
+    
     isPlaying = YES;
     
     id track = [_currentPlaylist objectAtIndex:playingIndex];
@@ -80,6 +82,10 @@
 
 - (BOOL) isPlaying{
     return isPlaying;
+}
+
+- (unsigned long) getPlayingIndex{
+    return playingIndex;
 }
 
 - (void) play{
@@ -112,7 +118,7 @@
     if(playingIndex + 1 == _currentPlaylist.count){ // At the end
         [self pause];
     }else{
-        spotTimer = [NSTimer scheduledTimerWithTimeInterval:500 target:self selector:@selector(timerFired) userInfo:nil repeats:NO];
+        spotTimer = [NSTimer scheduledTimerWithTimeInterval:0.5 target:self selector:@selector(timerFired) userInfo:nil repeats:NO];
         [self playSongAtIndex:(playingIndex + 1)];
     }
 }
@@ -121,13 +127,13 @@
     if(playingIndex == 0){
         [self playSongAtIndex:0];
     }else{
-        spotTimer = [NSTimer scheduledTimerWithTimeInterval:500 target:self selector:@selector(timerFired) userInfo:nil repeats:NO];
+        spotTimer = [NSTimer scheduledTimerWithTimeInterval:0.5 target:self selector:@selector(timerFired) userInfo:nil repeats:NO];
         [self playSongAtIndex:(playingIndex - 1)];
     }
 }
 
 - (void) startTimer{
-    spotTimer = [NSTimer scheduledTimerWithTimeInterval:500 target:self selector:@selector(timerFired) userInfo:nil repeats:NO];
+    spotTimer = [NSTimer scheduledTimerWithTimeInterval:0.5 target:self selector:@selector(timerFired) userInfo:nil repeats:NO];
 }
 
 #pragma mark - AVAudioPlayerDelegate
@@ -143,7 +149,6 @@
 
 - (void) audioStreaming:(SPTAudioStreamingController *)audioStreaming didStopPlayingTrack:(NSURL *)trackUri{
     if(spotTimer != nil && spotTimer.isValid){ // some stuff happened
-        
     }else{// track ended
         [self nextSong];
     }

@@ -7,10 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <Spotify/Spotify.h>
+#import "SpotifyPlayer.h"
 
-@interface SearchViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
+@interface SearchViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
+@property (strong, nonatomic) SpotifyPlayer *spotifyPlayer;
 
 @end

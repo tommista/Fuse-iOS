@@ -16,4 +16,6 @@
 
 + (SavedPlaylistManager *) getSharedInstance;
 
+- (void) deleteTrackAtIndex:(int) index;
+
 @end

@@ -35,14 +35,26 @@
     if(self){
         defaults = [NSUserDefaults standardUserDefaults];
         _savedPlaylist = [[NSMutableArray alloc] init];
-        [self serialize];
+        //[defaults setObject:@"spotify:track:5PUawWFG1oIS2NwEcyHaCr@216760840" forKey:SAVED_DATA_KEY];
         [self deserialize];
     }
     return self;
 }
 
 - (void) serialize{
-    [defaults setObject:@"spotify:track:5PUawWFG1oIS2NwEcyHaCr@216760840" forKey:SAVED_DATA_KEY];
+    NSString *str = [[NSString alloc] init];
+    for(id anonTrack in _savedPlaylist){
+        if([[anonTrack class] isSubclassOfClass:[SPTTrack class]]){ // spotify track
+            str = [str stringByAppendingString: ((SPTTrack *)anonTrack).uri.absoluteString];
+            str = [str stringByAppendingString:@"@"];
+        }else{ // soundcloud track
+            str = [str stringByAppendingString: ((SoundcloudTrack *)anonTrack).trackId];
+            str = [str stringByAppendingString:@"@"];
+        }
+    }
+    str = [str substringToIndex:str.length - 1];
+    [defaults setObject:str forKey:SAVED_DATA_KEY];
+    
     [defaults synchronize];
 }
 
@@ -82,6 +94,11 @@
         [[NSNotificationCenter defaultCenter] postNotificationName:DESERIALIZATION_FINISHED object:nil];
     }
 
+}
+
+- (void) deleteTrackAtIndex:(int) index{
+    [_savedPlaylist removeObjectAtIndex:index];
+    [self serialize];
 }
 
 @end

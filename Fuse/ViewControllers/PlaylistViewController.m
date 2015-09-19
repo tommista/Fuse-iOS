@@ -91,11 +91,18 @@
         NSLog(@"sctrack: %@", scTrack);
         cell.textLabel.text = scTrack.trackName;
     }else{
-        cell.textLabel.text = @"waiting";
+        cell.textLabel.text = @"TBD";
     }
     
     
     return cell;
+}
+
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (editingStyle == UITableViewCellEditingStyleDelete) {
+        [_savedPlaylistManager deleteTrackAtIndex:(int)indexPath.row];
+        [_tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+    }
 }
 
 #pragma mark - UITableViewDelegate

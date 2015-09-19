@@ -14,7 +14,7 @@
     self = [super init];
     if(self){
         
-        _trackId = [json objectForKey:@"id"];
+        _trackId = [NSString stringWithFormat:@"%lu", ((NSNumber *)[json objectForKey:@"id"]).unsignedLongValue];
         _trackName = [json objectForKey:@"title"];
         _artistName = [[json objectForKey:@"user"] objectForKey:@"username"];
         

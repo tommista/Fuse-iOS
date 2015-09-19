@@ -22,6 +22,7 @@
 		0B7ED86E1BAD1CF7002F4DAC /* SearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B7ED86C1BAD1CF7002F4DAC /* SearchViewController.m */; };
 		0B7ED86F1BAD1CF7002F4DAC /* SearchViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0B7ED86D1BAD1CF7002F4DAC /* SearchViewController.xib */; };
 		0B7ED8731BAD301E002F4DAC /* SoundcloudTrack.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B7ED8721BAD301E002F4DAC /* SoundcloudTrack.m */; };
+		0B7ED8761BAD49E3002F4DAC /* SoundcloudPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B7ED8751BAD49E3002F4DAC /* SoundcloudPlayer.m */; };
 		3E6BA756BD48AF08C53EA63D /* libPods-Fuse.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 907CFF891CCBC3679EC4B3D0 /* libPods-Fuse.a */; };
 /* End PBXBuildFile section */
 
@@ -63,6 +64,8 @@
 		0B7ED86D1BAD1CF7002F4DAC /* SearchViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SearchViewController.xib; path = ViewControllers/SearchViewController.xib; sourceTree = "<group>"; };
 		0B7ED8711BAD301E002F4DAC /* SoundcloudTrack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SoundcloudTrack.h; path = Models/SoundcloudTrack.h; sourceTree = "<group>"; };
 		0B7ED8721BAD301E002F4DAC /* SoundcloudTrack.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SoundcloudTrack.m; path = Models/SoundcloudTrack.m; sourceTree = "<group>"; };
+		0B7ED8741BAD49E3002F4DAC /* SoundcloudPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SoundcloudPlayer.h; path = Players/SoundcloudPlayer.h; sourceTree = "<group>"; };
+		0B7ED8751BAD49E3002F4DAC /* SoundcloudPlayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SoundcloudPlayer.m; path = Players/SoundcloudPlayer.m; sourceTree = "<group>"; };
 		907CFF891CCBC3679EC4B3D0 /* libPods-Fuse.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Fuse.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BEC5EAEA39425EBCC1D0691C /* Pods-Fuse.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Fuse.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Fuse/Pods-Fuse.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -171,6 +174,8 @@
 			children = (
 				0B7ED8681BAD18D7002F4DAC /* SpotifyPlayer.h */,
 				0B7ED8691BAD18D7002F4DAC /* SpotifyPlayer.m */,
+				0B7ED8741BAD49E3002F4DAC /* SoundcloudPlayer.h */,
+				0B7ED8751BAD49E3002F4DAC /* SoundcloudPlayer.m */,
 			);
 			name = Players;
 			sourceTree = "<group>";
@@ -342,6 +347,7 @@
 			files = (
 				0B7ED8731BAD301E002F4DAC /* SoundcloudTrack.m in Sources */,
 				0B7ED85E1BAD041D002F4DAC /* PlaylistViewController.m in Sources */,
+				0B7ED8761BAD49E3002F4DAC /* SoundcloudPlayer.m in Sources */,
 				0B7ED8581BACF254002F4DAC /* DrawerViewController.m in Sources */,
 				0B7ED86A1BAD18D7002F4DAC /* SpotifyPlayer.m in Sources */,
 				0B462A541BACE69700B65D51 /* AppDelegate.m in Sources */,

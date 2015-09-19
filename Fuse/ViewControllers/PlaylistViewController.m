@@ -9,9 +9,12 @@
 #import "PlaylistViewController.h"
 #import "AppDelegate.h"
 #import <MMDrawerBarButtonItem.h>
+#import "Secrets.h"
+#import <AVFoundation/AVFoundation.h>
 
 @interface PlaylistViewController ()
-
+{
+}
 @end
 
 @implementation PlaylistViewController
@@ -20,6 +23,7 @@
     [super viewDidLoad];
     
     _spotifyPlayer = [SpotifyPlayer getSharedPlayer];
+    _soundcloudPlayer = [SoundcloudPlayer getSharedInstance];
     
     _tableView.dataSource = self;
     _tableView.delegate = self;

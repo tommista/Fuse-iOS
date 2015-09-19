@@ -22,5 +22,6 @@
 - (void) playPause;
 - (void) nextSong;
 - (void) previousSong;
+- (void) startTimer;
 
 @end

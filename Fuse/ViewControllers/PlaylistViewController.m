@@ -122,6 +122,7 @@
 - (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     [_songManager setCurrentPlaylist:[_savedPlaylistManager savedPlaylist]];
+    [_songManager startTimer];
     [_songManager playSongAtIndex:indexPath.row];
 }
 

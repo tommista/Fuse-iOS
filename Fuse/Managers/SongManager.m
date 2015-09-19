@@ -17,6 +17,7 @@
     long playingIndex;
     long playingSource;
     BOOL isPlaying;
+    NSTimer *spotTimer;
 }
 @end
 
@@ -111,6 +112,7 @@
     if(playingIndex + 1 == _currentPlaylist.count){ // At the end
         [self pause];
     }else{
+        spotTimer = [NSTimer scheduledTimerWithTimeInterval:500 target:self selector:@selector(timerFired) userInfo:nil repeats:NO];
         [self playSongAtIndex:(playingIndex + 1)];
     }
 }
@@ -119,8 +121,13 @@
     if(playingIndex == 0){
         [self playSongAtIndex:0];
     }else{
+        spotTimer = [NSTimer scheduledTimerWithTimeInterval:500 target:self selector:@selector(timerFired) userInfo:nil repeats:NO];
         [self playSongAtIndex:(playingIndex - 1)];
     }
+}
+
+- (void) startTimer{
+    spotTimer = [NSTimer scheduledTimerWithTimeInterval:500 target:self selector:@selector(timerFired) userInfo:nil repeats:NO];
 }
 
 #pragma mark - AVAudioPlayerDelegate
@@ -135,18 +142,28 @@
 #pragma mark - SPTAudioStreamingPlaybackDelegate
 
 - (void) audioStreaming:(SPTAudioStreamingController *)audioStreaming didStopPlayingTrack:(NSURL *)trackUri{
-    
-    SPTPartialTrack *track = [_currentPlaylist objectAtIndex:playingIndex];
-    if([track.uri.absoluteString isEqualToString:trackUri.absoluteString]){ // The song just ended
-        NSLog(@"### spotify song finished");
-        [_spotifyPlayer.player stop:^(NSError *error) {
-            NSLog(@"Spotify stop error: %@", error);
-        }];
-        _spotifyPlayer.player = nil;
-        [self nextSong];
-    }else { // the song was skipped
+    if(spotTimer != nil && spotTimer.isValid){ // some stuff happened
         
+    }else{// track ended
+        [self nextSong];
     }
+}
+
+/*- (void) audioStreaming:(SPTAudioStreamingController *)audioStreaming didChangePlaybackStatus:(BOOL)isPlaying{
+    NSLog(@"status: %d", isPlaying);
+    NSLog(@"### spotify song finished");
+    [_spotifyPlayer.player stop:^(NSError *error) {
+        NSLog(@"Spotify stop error: %@", error);
+    }];
+    _spotifyPlayer.player = nil;
+    [self nextSong];
+}*/
+
+#pragma mark - Timer Actions
+
+- (void) timerFired{
+    [spotTimer invalidate];
+    spotTimer = nil;
 }
 
 @end

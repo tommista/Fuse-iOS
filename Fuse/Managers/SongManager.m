@@ -7,6 +7,7 @@
 //
 
 #import "SongManager.h"
+#import "SoundcloudTrack.h"
 
 #define NONE_PLAYING 0
 #define SPOTIFY_PLAYING 1
@@ -15,6 +16,7 @@
 @interface SongManager(){
     long playingIndex;
     long playingSource;
+    BOOL isPlaying;
 }
 @end
 
@@ -35,8 +37,46 @@
         _soundcloudPlayer = [SoundcloudPlayer getSharedInstance];
         playingSource = NONE_PLAYING;
         playingIndex = 0;
+        isPlaying = NO;
     }
     return self;
+}
+
+- (void) setCurrentPlaylist:(NSArray *)currentPlaylist{
+    _currentPlaylist = currentPlaylist;
+}
+
+- (void) playSongAtIndex:(long)index{
+    playingIndex = index;
+    
+    [self pause];
+    
+    isPlaying = YES;
+    
+    id track = [_currentPlaylist objectAtIndex:playingIndex];
+    if([[track class] isSubclassOfClass:[SPTPartialTrack class]]){// spotify track
+        SPTPartialTrack *spTrack = (SPTPartialTrack *) track;
+        playingSource = SPOTIFY_PLAYING;
+        [_spotifyPlayer playSong:spTrack.uri];
+    }else if ([[track class] isSubclassOfClass:[SoundcloudTrack class]]){// soundcloud track
+        SoundcloudTrack *scTrack = (SoundcloudTrack *) track;
+        playingSource = SOUNDCLOUD_PLAYING;
+        [_soundcloudPlayer playSong:scTrack.trackId];
+    }
+}
+
+- (void) playPause{
+    if(isPlaying){ // is currently playing, going to pause
+        isPlaying = NO;
+        [self pause];
+    }else{ //  is currentply paused, going to start
+        isPlaying = YES;
+        [self play];
+    }
+}
+
+- (BOOL) isPlaying{
+    return isPlaying;
 }
 
 - (void) play{
@@ -67,12 +107,18 @@
 
 - (void) nextSong{
     if(playingIndex + 1 == _currentPlaylist.count){ // At the end
-        
+        [self pause];
     }else{
+        [self playSongAtIndex:(playingIndex + 1)];
     }
 }
 
 - (void) previousSong{
+    if(playingIndex == 0){
+        [self playSongAtIndex:0];
+    }else{
+        [self playSongAtIndex:(playingIndex - 1)];
+    }
 }
 
 @end

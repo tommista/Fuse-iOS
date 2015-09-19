@@ -17,8 +17,9 @@
 @property (strong, nonatomic) NSArray *currentPlaylist;
 
 + (SongManager *) getSharedInstance;
-- (void) play;
-- (void) pause;
+- (void) playSongAtIndex:(long)index;
+- (BOOL) isPlaying;
+- (void) playPause;
 - (void) nextSong;
 - (void) previousSong;
 

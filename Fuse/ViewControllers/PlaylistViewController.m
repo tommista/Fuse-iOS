@@ -63,15 +63,15 @@
 }
 
 - (IBAction) backButtonPressed:(id)sender{
-    
+    [_songManager previousSong];
 }
 
 - (IBAction) playPauseButtonPressed:(id)sender{
-    
+    [_songManager playPause];
 }
 
 - (IBAction) nextButtonPressed:(id)sender{
-    
+    [_songManager nextSong];
 }
 
 #pragma mark - UITableViewDataSource
@@ -121,6 +121,8 @@
 
 - (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    [_songManager setCurrentPlaylist:[_savedPlaylistManager savedPlaylist]];
+    [_songManager playSongAtIndex:indexPath.row];
 }
 
 @end

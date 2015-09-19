@@ -7,9 +7,6 @@
 //
 
 #import "SavedPlaylistManager.h"
-#import <Spotify/Spotify.h>
-#import <AFNetworking/AFNetworking.h>
-#import "SoundcloudTrack.h"
 #import "Secrets.h"
 
 #define SAVED_DATA_KEY @"saved_data_key"
@@ -44,8 +41,8 @@
 - (void) serialize{
     NSString *str = [[NSString alloc] init];
     for(id anonTrack in _savedPlaylist){
-        if([[anonTrack class] isSubclassOfClass:[SPTTrack class]]){ // spotify track
-            str = [str stringByAppendingString: ((SPTTrack *)anonTrack).uri.absoluteString];
+        if([[anonTrack class] isSubclassOfClass:[SPTPartialTrack class]]){ // spotify track
+            str = [str stringByAppendingString: ((SPTPartialTrack *)anonTrack).uri.absoluteString];
             str = [str stringByAppendingString:@"@"];
         }else{ // soundcloud track
             str = [str stringByAppendingString: ((SoundcloudTrack *)anonTrack).trackId];
@@ -98,6 +95,16 @@
 
 - (void) deleteTrackAtIndex:(int) index{
     [_savedPlaylist removeObjectAtIndex:index];
+    [self serialize];
+}
+
+- (void) addSpotifyTrack:(SPTPartialTrack *)track{
+    [_savedPlaylist addObject:track];
+    [self serialize];
+}
+
+- (void) addSoundcloudTrack:(SoundcloudTrack *)track{
+    [_savedPlaylist addObject:track];
     [self serialize];
 }
 

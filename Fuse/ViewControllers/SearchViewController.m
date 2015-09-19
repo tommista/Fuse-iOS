@@ -13,10 +13,12 @@
 #import <MMDrawerBarButtonItem.h>
 #import <AFNetworking/AFNetworking.h>
 #import "SoundcloudTrack.h"
+#import "SavedPlaylistManager.h"
 
 @interface SearchViewController (){
     NSMutableArray *songsArray;
     AFHTTPRequestOperationManager *afManager;
+    SavedPlaylistManager *savedPlaylistManager;
 }
 @end
 
@@ -27,6 +29,7 @@
     
     _spotifyPlayer = [SpotifyPlayer getSharedPlayer];
     afManager = [AFHTTPRequestOperationManager manager];
+    savedPlaylistManager = [SavedPlaylistManager getSharedInstance];
     
     songsArray = [[NSMutableArray alloc] init];
     
@@ -121,7 +124,15 @@
 }
 
 - (void) tableView:(UITableView *)tableView accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *)indexPath{
+    NSObject *genericTrack = [songsArray objectAtIndex:indexPath.row];
     
+    if([genericTrack.class isSubclassOfClass:[SPTPartialTrack class]]){
+        SPTPartialTrack *track = (SPTPartialTrack *) genericTrack;
+        [savedPlaylistManager addSpotifyTrack:track];
+    }else{
+        SoundcloudTrack *track = (SoundcloudTrack *) genericTrack;
+        [savedPlaylistManager addSoundcloudTrack:track];
+    }
 }
 
 #pragma mark - UISearchBarDelegate

@@ -7,6 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <Spotify/Spotify.h>
+#import <AFNetworking/AFNetworking.h>
+#import "SoundcloudTrack.h"
 
 #define DESERIALIZATION_FINISHED @"Deserialization_finished"
 
@@ -17,5 +20,7 @@
 + (SavedPlaylistManager *) getSharedInstance;
 
 - (void) deleteTrackAtIndex:(int) index;
+- (void) addSpotifyTrack:(SPTPartialTrack *)track;
+- (void) addSoundcloudTrack:(SoundcloudTrack *)track;
 
 @end

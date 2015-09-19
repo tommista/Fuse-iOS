@@ -82,8 +82,8 @@
     }
     
     id track = [_savedPlaylistManager.savedPlaylist objectAtIndex:indexPath.row];
-    if([[track class] isSubclassOfClass:[SPTTrack class]]){// spotify track
-        SPTTrack *spTrack = (SPTTrack *) track;
+    if([[track class] isSubclassOfClass:[SPTPartialTrack class]]){// spotify track
+        SPTPartialTrack *spTrack = (SPTPartialTrack *) track;
         NSLog(@"sptrack: %@", spTrack);
         cell.textLabel.text = spTrack.name;
     }else if ([[track class] isSubclassOfClass:[SoundcloudTrack class]]){// soundcloud track

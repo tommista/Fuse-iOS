@@ -15,7 +15,12 @@
 @interface PlaylistViewController : UIViewController <UITableViewDelegate, UITableViewDataSource>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (weak, nonatomic) IBOutlet UIToolbar *toolbar;
 @property (strong, nonatomic) SavedPlaylistManager *savedPlaylistManager;
 @property (strong, nonatomic) SongManager *songManager;
+
+- (IBAction) backButtonPressed:(id)sender;
+- (IBAction) playPauseButtonPressed:(id)sender;
+- (IBAction) nextButtonPressed:(id)sender;
 
 @end

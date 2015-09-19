@@ -62,6 +62,18 @@
     }
 }
 
+- (IBAction) backButtonPressed:(id)sender{
+    
+}
+
+- (IBAction) playPauseButtonPressed:(id)sender{
+    
+}
+
+- (IBAction) nextButtonPressed:(id)sender{
+    
+}
+
 #pragma mark - UITableViewDataSource
 
 - (NSInteger) numberOfSectionsInTableView:(UITableView *)tableView{

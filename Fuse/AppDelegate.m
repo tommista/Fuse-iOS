@@ -8,6 +8,7 @@
 
 #import "AppDelegate.h"
 #import "DrawerViewController.h"
+#import <MMDrawerController.h>
 
 @interface AppDelegate ()
 
@@ -18,8 +19,17 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-    DrawerViewController *viewController = [[DrawerViewController alloc] initWithNibName:@"DrawerViewController" bundle:nil];
-    self.window.rootViewController = viewController;
+    
+    DrawerViewController *drawerViewController = [[DrawerViewController alloc] initWithNibName:@"DrawerViewController" bundle:nil];
+    
+    DrawerViewController *middleViewController = [[DrawerViewController alloc] initWithNibName:@"DrawerViewController" bundle:nil];
+    UINavigationController *middleNav = [[UINavigationController alloc] initWithRootViewController:middleViewController];
+    
+    _drawerController = [[MMDrawerController alloc] initWithCenterViewController:middleNav leftDrawerViewController:drawerViewController];
+    _drawerController.openDrawerGestureModeMask = (MMOpenDrawerGestureModePanningCenterView);
+    _drawerController.closeDrawerGestureModeMask = (MMCloseDrawerGestureModePanningDrawerView | MMCloseDrawerGestureModePanningCenterView);
+    self.window.rootViewController = _drawerController;
+    
     [self.window makeKeyAndVisible];
     return YES;
 }

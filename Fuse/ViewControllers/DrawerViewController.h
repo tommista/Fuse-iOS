@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
-@interface DrawerViewController : UIViewController
+@interface DrawerViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
+
+@property (nonatomic, weak) IBOutlet UITableView *tableView;
 
 @end

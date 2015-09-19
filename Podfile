@@ -3,6 +3,7 @@
 
 target 'Fuse' do
 pod "AFNetworking", "~> 2.0"
+pod 'MMDrawerController', '~> 0.5.7'
 end
 
 target 'FuseTests' do

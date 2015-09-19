@@ -10,6 +10,8 @@
 #import "DrawerViewController.h"
 #import <MMDrawerController.h>
 #import "PlaylistViewController.h"
+#import <Spotify/SPTAuth.h>
+#import "Secrets.h"
 
 #define UIColorFromRGB(rgbValue) [UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16))/255.0 green:((float)((rgbValue & 0xFF00) >> 8))/255.0 blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
 
@@ -27,6 +29,17 @@
     [UINavigationBar appearance].tintColor = UIColorFromRGB(0xEEEEEE);
     [UINavigationBar appearance].translucent = NO;
     
+    [[SPTAuth defaultInstance] setClientID:SPOTIFY_CLIENT_ID];
+    [[SPTAuth defaultInstance] setRedirectURL:[NSURL URLWithString:@"fuse://spotify"]];
+    [[SPTAuth defaultInstance] setRequestedScopes:@[SPTAuthStreamingScope]];
+    
+    _spotifyPlayer = [SpotifyPlayer getSharedPlayer];
+    
+    NSURL *loginURL = [[SPTAuth defaultInstance] loginURL];
+    
+    [application performSelector:@selector(openURL:)
+                      withObject:loginURL afterDelay:0.1];
+    
     DrawerViewController *drawerViewController = [[DrawerViewController alloc] initWithNibName:@"DrawerViewController" bundle:nil];
     
     PlaylistViewController *middleViewController = [[PlaylistViewController alloc] initWithNibName:@"PlaylistViewController" bundle:nil];
@@ -39,6 +52,29 @@
     
     [self.window makeKeyAndVisible];
     return YES;
+}
+
+-(BOOL)application:(UIApplication *)application
+           openURL:(NSURL *)url
+ sourceApplication:(NSString *)sourceApplication
+        annotation:(id)annotation {
+    
+    // Ask SPTAuth if the URL given is a Spotify authentication callback
+    if ([[SPTAuth defaultInstance] canHandleURL:url]) {
+        [[SPTAuth defaultInstance] handleAuthCallbackWithTriggeredAuthURL:url callback:^(NSError *error, SPTSession *session) {
+            
+            if (error != nil) {
+                NSLog(@"*** Auth error: %@", error);
+                return;
+            }
+            
+            // Call the -playUsingSession: method to play a track
+            [_spotifyPlayer setSession:session];
+        }];
+        return YES;
+    }
+    
+    return NO;
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {

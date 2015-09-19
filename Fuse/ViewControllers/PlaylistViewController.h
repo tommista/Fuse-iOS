@@ -7,9 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "SpotifyPlayer.h"
 
 @interface PlaylistViewController : UIViewController <UITableViewDelegate, UITableViewDataSource>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (strong, nonatomic) SpotifyPlayer *spotifyPlayer;
 
 @end

@@ -11,9 +11,12 @@
 #import <MMDrawerBarButtonItem.h>
 #import "Secrets.h"
 #import <AVFoundation/AVFoundation.h>
+#import "SongManager.h"
+#import "SoundcloudTrack.h"
 
 @interface PlaylistViewController ()
 {
+    NSArray *playlist;
 }
 @end
 
@@ -22,14 +25,30 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    _spotifyPlayer = [SpotifyPlayer getSharedPlayer];
-    _soundcloudPlayer = [SoundcloudPlayer getSharedInstance];
+    _songManager = [SongManager getSharedInstance];
+    _savedPlaylistManager = [SavedPlaylistManager getSharedInstance];
     
     _tableView.dataSource = self;
     _tableView.delegate = self;
     _tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
     
     self.navigationItem.leftBarButtonItem = [[MMDrawerBarButtonItem alloc] initWithTarget:self action:@selector(menuButtonPressed:)];
+}
+
+- (void) viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(playlistDeserialized) name:DESERIALIZATION_FINISHED object:nil];
+}
+
+- (void) viewWillDisappear:(BOOL)animated{
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:DESERIALIZATION_FINISHED object:nil];
+    [super viewWillDisappear:animated];
+}
+
+#pragma mark - Notifications
+
+- (void) playlistDeserialized{
+    [_tableView reloadData];
 }
 
 #pragma mark - Actions
@@ -50,7 +69,7 @@
 }
 
 - (NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return 1;
+    return _savedPlaylistManager.savedPlaylist.count;
 }
 
 - (UITableViewCell *) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -62,9 +81,19 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
     }
     
-    NSString *cellText = @"asdf";
+    id track = [_savedPlaylistManager.savedPlaylist objectAtIndex:indexPath.row];
+    if([[track class] isSubclassOfClass:[SPTTrack class]]){// spotify track
+        SPTTrack *spTrack = (SPTTrack *) track;
+        NSLog(@"sptrack: %@", spTrack);
+        cell.textLabel.text = spTrack.name;
+    }else if ([[track class] isSubclassOfClass:[SoundcloudTrack class]]){// soundcloud track
+        SoundcloudTrack *scTrack = (SoundcloudTrack *) track;
+        NSLog(@"sctrack: %@", scTrack);
+        cell.textLabel.text = scTrack.trackName;
+    }else{
+        cell.textLabel.text = @"waiting";
+    }
     
-    cell.textLabel.text = cellText;
     
     return cell;
 }

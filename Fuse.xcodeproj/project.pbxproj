@@ -86,13 +86,11 @@
 		0B462A4D1BACE69700B65D51 /* Fuse */ = {
 			isa = PBXGroup;
 			children = (
+				0B7ED85A1BACF520002F4DAC /* ViewControllers */,
 				0B462A521BACE69700B65D51 /* AppDelegate.h */,
 				0B462A531BACE69700B65D51 /* AppDelegate.m */,
 				0B462A5B1BACE69700B65D51 /* Images.xcassets */,
 				0B462A4E1BACE69700B65D51 /* Supporting Files */,
-				0B7ED8551BACF254002F4DAC /* DrawerViewController.h */,
-				0B7ED8561BACF254002F4DAC /* DrawerViewController.m */,
-				0B7ED8571BACF254002F4DAC /* DrawerViewController.xib */,
 			);
 			path = Fuse;
 			sourceTree = "<group>";
@@ -121,6 +119,16 @@
 				0B462A691BACE69700B65D51 /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		0B7ED85A1BACF520002F4DAC /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				0B7ED8551BACF254002F4DAC /* DrawerViewController.h */,
+				0B7ED8561BACF254002F4DAC /* DrawerViewController.m */,
+				0B7ED8571BACF254002F4DAC /* DrawerViewController.xib */,
+			);
+			name = ViewControllers;
 			sourceTree = "<group>";
 		};
 		5718902496E4812ACDEA7532 /* Pods */ = {

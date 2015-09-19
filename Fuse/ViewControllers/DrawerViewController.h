@@ -1,5 +1,5 @@
 //
-//  ViewController.h
+//  DrawerViewController.h
 //  Fuse
 //
 //  Created by Tommy Brown on 9/18/15.
@@ -8,8 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ViewController : UIViewController
-
+@interface DrawerViewController : UIViewController
 
 @end
-

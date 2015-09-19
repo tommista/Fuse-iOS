@@ -13,6 +13,8 @@
 		0B462A6B1BACE69700B65D51 /* FuseTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B462A6A1BACE69700B65D51 /* FuseTests.m */; };
 		0B7ED8581BACF254002F4DAC /* DrawerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B7ED8561BACF254002F4DAC /* DrawerViewController.m */; };
 		0B7ED8591BACF254002F4DAC /* DrawerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0B7ED8571BACF254002F4DAC /* DrawerViewController.xib */; };
+		0B7ED85E1BAD041D002F4DAC /* PlaylistViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B7ED85C1BAD041D002F4DAC /* PlaylistViewController.m */; };
+		0B7ED85F1BAD041D002F4DAC /* PlaylistViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0B7ED85D1BAD041D002F4DAC /* PlaylistViewController.xib */; };
 		3E6BA756BD48AF08C53EA63D /* libPods-Fuse.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 907CFF891CCBC3679EC4B3D0 /* libPods-Fuse.a */; };
 /* End PBXBuildFile section */
 
@@ -40,6 +42,9 @@
 		0B7ED8551BACF254002F4DAC /* DrawerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DrawerViewController.h; path = ViewControllers/DrawerViewController.h; sourceTree = "<group>"; };
 		0B7ED8561BACF254002F4DAC /* DrawerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DrawerViewController.m; path = ViewControllers/DrawerViewController.m; sourceTree = "<group>"; };
 		0B7ED8571BACF254002F4DAC /* DrawerViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = DrawerViewController.xib; path = ViewControllers/DrawerViewController.xib; sourceTree = "<group>"; };
+		0B7ED85B1BAD041D002F4DAC /* PlaylistViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PlaylistViewController.h; path = ViewControllers/PlaylistViewController.h; sourceTree = "<group>"; };
+		0B7ED85C1BAD041D002F4DAC /* PlaylistViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PlaylistViewController.m; path = ViewControllers/PlaylistViewController.m; sourceTree = "<group>"; };
+		0B7ED85D1BAD041D002F4DAC /* PlaylistViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = PlaylistViewController.xib; path = ViewControllers/PlaylistViewController.xib; sourceTree = "<group>"; };
 		907CFF891CCBC3679EC4B3D0 /* libPods-Fuse.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Fuse.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BEC5EAEA39425EBCC1D0691C /* Pods-Fuse.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Fuse.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Fuse/Pods-Fuse.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -127,6 +132,9 @@
 				0B7ED8551BACF254002F4DAC /* DrawerViewController.h */,
 				0B7ED8561BACF254002F4DAC /* DrawerViewController.m */,
 				0B7ED8571BACF254002F4DAC /* DrawerViewController.xib */,
+				0B7ED85B1BAD041D002F4DAC /* PlaylistViewController.h */,
+				0B7ED85C1BAD041D002F4DAC /* PlaylistViewController.m */,
+				0B7ED85D1BAD041D002F4DAC /* PlaylistViewController.xib */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -230,6 +238,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0B7ED85F1BAD041D002F4DAC /* PlaylistViewController.xib in Resources */,
 				0B7ED8591BACF254002F4DAC /* DrawerViewController.xib in Resources */,
 				0B462A5C1BACE69700B65D51 /* Images.xcassets in Resources */,
 			);
@@ -282,6 +291,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0B7ED85E1BAD041D002F4DAC /* PlaylistViewController.m in Sources */,
 				0B7ED8581BACF254002F4DAC /* DrawerViewController.m in Sources */,
 				0B462A541BACE69700B65D51 /* AppDelegate.m in Sources */,
 				0B462A511BACE69700B65D51 /* main.m in Sources */,

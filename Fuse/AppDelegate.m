@@ -9,6 +9,7 @@
 #import "AppDelegate.h"
 #import "DrawerViewController.h"
 #import <MMDrawerController.h>
+#import "PlaylistViewController.h"
 
 @interface AppDelegate ()
 
@@ -22,7 +23,7 @@
     
     DrawerViewController *drawerViewController = [[DrawerViewController alloc] initWithNibName:@"DrawerViewController" bundle:nil];
     
-    DrawerViewController *middleViewController = [[DrawerViewController alloc] initWithNibName:@"DrawerViewController" bundle:nil];
+    PlaylistViewController *middleViewController = [[PlaylistViewController alloc] initWithNibName:@"PlaylistViewController" bundle:nil];
     UINavigationController *middleNav = [[UINavigationController alloc] initWithRootViewController:middleViewController];
     
     _drawerController = [[MMDrawerController alloc] initWithCenterViewController:middleNav leftDrawerViewController:drawerViewController];

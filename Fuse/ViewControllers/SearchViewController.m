@@ -48,9 +48,18 @@
         NSMutableArray *trackArray = [[NSMutableArray alloc] init];
         for(NSDictionary *data in jsonData){
             [trackArray addObject:[[SoundcloudTrack alloc] initWithJSON:data]];
-            NSLog(@"%@", [trackArray lastObject]);
         }
-        [songsArray addObjectsFromArray:trackArray];
+        
+        for(int i = 1; i <= trackArray.count; i++){
+            long insertLocation = i * 2;
+            long currentSize = songsArray.count;
+            if(insertLocation < currentSize - 1){
+                [songsArray insertObject:[trackArray objectAtIndex:i - 1] atIndex:insertLocation];
+            }else{
+                [songsArray addObject:[trackArray objectAtIndex:i - 1]];
+            }
+        }
+        
         [_tableView reloadData];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"Error: %@", error);
@@ -122,9 +131,9 @@
     [songsArray removeAllObjects];
     [SPTSearch performSearchWithQuery:searchBar.text queryType:SPTQueryTypeTrack accessToken:nil callback:^(NSError *error, SPTListPage *object) {
         [songsArray addObjectsFromArray:object.items];
-        [_tableView reloadData];
+        [self getSoundcloudResultsForString:searchBar.text];
+        //[_tableView reloadData];
     }];
-    [self getSoundcloudResultsForString:searchBar.text];
 }
 
 @end

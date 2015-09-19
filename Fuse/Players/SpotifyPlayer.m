@@ -31,6 +31,7 @@
     
     if (self.player == nil) {
         self.player = [[SPTAudioStreamingController alloc] initWithClientId:[SPTAuth defaultInstance].clientID];
+        self.player.playbackDelegate = _playbackDelegate;
     }
     
     [self.player loginWithSession:session callback:^(NSError *error) {

@@ -34,7 +34,9 @@
     self = [super init];
     if(self){
         _spotifyPlayer = [SpotifyPlayer getSharedPlayer];
+        _spotifyPlayer.playbackDelegate = self;
         _soundcloudPlayer = [SoundcloudPlayer getSharedInstance];
+        _soundcloudPlayer.playbackDelegate = self;
         playingSource = NONE_PLAYING;
         playingIndex = 0;
         isPlaying = NO;
@@ -118,6 +120,32 @@
         [self playSongAtIndex:0];
     }else{
         [self playSongAtIndex:(playingIndex - 1)];
+    }
+}
+
+#pragma mark - AVAudioPlayerDelegate
+
+- (void) audioPlayerDidFinishPlaying:(AVAudioPlayer *)player successfully:(BOOL)flag{
+    NSLog(@"#### Song finished");
+    [_soundcloudPlayer.player stop];
+    _soundcloudPlayer.player = nil;
+    [self nextSong];
+}
+
+#pragma mark - SPTAudioStreamingPlaybackDelegate
+
+- (void) audioStreaming:(SPTAudioStreamingController *)audioStreaming didStopPlayingTrack:(NSURL *)trackUri{
+    
+    SPTPartialTrack *track = [_currentPlaylist objectAtIndex:playingIndex];
+    if([track.uri.absoluteString isEqualToString:trackUri.absoluteString]){ // The song just ended
+        NSLog(@"### spotify song finished");
+        [_spotifyPlayer.player stop:^(NSError *error) {
+            NSLog(@"Spotify stop error: %@", error);
+        }];
+        _spotifyPlayer.player = nil;
+        [self nextSong];
+    }else { // the song was skipped
+        
     }
 }
 

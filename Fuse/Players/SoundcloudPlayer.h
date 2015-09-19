@@ -12,6 +12,7 @@
 @interface SoundcloudPlayer : NSObject
 
 @property (strong, nonatomic) AVAudioPlayer *player;
+@property (weak) id<AVAudioPlayerDelegate> playbackDelegate;
 
 + (SoundcloudPlayer *) getSharedInstance;
 

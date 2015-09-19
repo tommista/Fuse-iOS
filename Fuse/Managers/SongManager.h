@@ -10,7 +10,7 @@
 #import "SpotifyPlayer.h"
 #import "SoundcloudPlayer.h"
 
-@interface SongManager : NSObject
+@interface SongManager : NSObject <AVAudioPlayerDelegate, SPTAudioStreamingPlaybackDelegate>
 
 @property (strong, nonatomic) SpotifyPlayer *spotifyPlayer;
 @property (strong, nonatomic) SoundcloudPlayer *soundcloudPlayer;

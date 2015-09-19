@@ -13,6 +13,7 @@
 
 @property (nonatomic, strong) SPTSession *session;
 @property (nonatomic, strong) SPTAudioStreamingController *player;
+@property (weak) id<SPTAudioStreamingPlaybackDelegate> playbackDelegate;
 
 + (SpotifyPlayer *) getSharedPlayer;
 

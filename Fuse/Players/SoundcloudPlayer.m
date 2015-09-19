@@ -32,6 +32,7 @@
     
     NSURLSessionTask *task = [[NSURLSession sharedSession] dataTaskWithURL:trackURL completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
         _player = [[AVAudioPlayer alloc] initWithData:data error:nil]; // TODO fix this
+        _player.delegate = _playbackDelegate;
         [_player play];
     }];
     

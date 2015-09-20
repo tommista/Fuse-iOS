@@ -9,6 +9,7 @@
 #import "DiscoveryViewController.h"
 #import <MMDrawerController/MMDrawerBarButtonItem.h>
 #import "AppDelegate.h"
+#import "GenericTrack.h"
 #import <AFNetworking/AFNetworking.h>
 
 #define AROUND_ME 0
@@ -98,11 +99,16 @@
             
         }break;
         case HYPE_MACHINE:{
-            NSDictionary *parameters = @{@"type" : @"all", @"key" : @"swagger"};
+            NSDictionary *parameters = @{@"type" : @"premieres", @"key" : @"swagger"};
             AFHTTPRequestOperationManager *afManager = [AFHTTPRequestOperationManager manager];
             [afManager GET:@"https://api.hypem.com/v2/featured" parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
                 NSArray *jsonData = responseObject;
-                NSLog(@"Stuf: %@", jsonData);
+                NSMutableArray *tracks = [[NSMutableArray alloc] init];
+                for(NSDictionary *json in jsonData){
+                    [tracks addObject:[[GenericTrack alloc] initWithHypemJSON:json]];
+                    NSLog(@"%@", ((GenericTrack *)[tracks lastObject]).trackTitle);
+                }
+                
             } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                 NSLog(@"Error: %@", error);
             }];

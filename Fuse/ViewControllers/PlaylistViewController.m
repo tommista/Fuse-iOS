@@ -19,6 +19,7 @@
 {
     NSArray *playlist;
     unsigned long selectedRow;
+    NSTimer *ppTimer;
 }
 @end
 
@@ -40,11 +41,24 @@
 - (void) viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(playlistDeserialized) name:DESERIALIZATION_FINISHED object:nil];
+    ppTimer = [NSTimer scheduledTimerWithTimeInterval:0.25 target:self selector:@selector(ppTimerFired) userInfo:nil repeats:YES];
 }
 
 - (void) viewWillDisappear:(BOOL)animated{
     [[NSNotificationCenter defaultCenter] removeObserver:self name:DESERIALIZATION_FINISHED object:nil];
+    [ppTimer invalidate];
+    ppTimer = nil;
     [super viewWillDisappear:animated];
+}
+
+#pragma mark - Timer
+
+- (void) ppTimerFired{
+    if(_songManager.isPlaying){
+        _ppButton.image = [UIImage imageNamed:@"pause.png"];
+    }else{
+        _ppButton.image = [UIImage imageNamed:@"play2.png"];
+    }
 }
 
 #pragma mark - Notifications

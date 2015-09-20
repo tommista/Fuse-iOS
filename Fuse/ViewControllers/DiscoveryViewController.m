@@ -11,6 +11,7 @@
 #import "AppDelegate.h"
 #import "GenericTrack.h"
 #import <AFNetworking/AFNetworking.h>
+#import "GenericPlaylistViewController.h"
 
 #define AROUND_ME 0
 #define HYPE_MACHINE 1
@@ -82,7 +83,7 @@
             cell.textLabel.text = @"Around Me";
             break;
         case HYPE_MACHINE:
-            cell.textLabel.text = @"Hype Machine";
+            cell.textLabel.text = @"Hype Machine: Featured";
             break;
     }
     
@@ -108,6 +109,11 @@
                     [tracks addObject:[[GenericTrack alloc] initWithHypemJSON:json]];
                     NSLog(@"%@", ((GenericTrack *)[tracks lastObject]).trackTitle);
                 }
+                
+                GenericPlaylistViewController *vc = [[GenericPlaylistViewController alloc] initWithNibName:@"GenericPlaylistViewController" bundle:nil];
+                vc.playlist = tracks;
+                vc.playlistName = @"Featured";
+                [self.navigationController pushViewController:vc animated:YES];
                 
             } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                 NSLog(@"Error: %@", error);

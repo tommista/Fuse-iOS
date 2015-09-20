@@ -14,6 +14,7 @@
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (strong, nonatomic) SongManager *songManager;
 @property (strong, nonatomic) NSMutableArray *playlist;
+@property (strong, nonatomic) NSString *playlistName;
 
 - (IBAction) backButtonPressed:(id)sender;
 - (IBAction) playPauseButtonPressed:(id)sender;

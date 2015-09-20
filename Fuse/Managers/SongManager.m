@@ -8,6 +8,7 @@
 
 #import "SongManager.h"
 #import "SoundcloudTrack.h"
+#import "GenericTrack.h"
 
 #define NONE_PLAYING 0
 #define SPOTIFY_PLAYING 1
@@ -67,6 +68,12 @@
         SoundcloudTrack *scTrack = (SoundcloudTrack *) track;
         playingSource = SOUNDCLOUD_PLAYING;
         [_soundcloudPlayer playSong:scTrack.trackId];
+    }else{ // Generic track
+        GenericTrack *gTrack = (GenericTrack *) track;
+        playingSource = SOUNDCLOUD_PLAYING;
+        
+        NSArray *parts = [gTrack.trackURL.absoluteString componentsSeparatedByString:@"/"];
+        [_soundcloudPlayer playSong:[parts objectAtIndex:4]];
     }
 }
 

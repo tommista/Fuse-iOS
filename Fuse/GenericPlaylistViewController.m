@@ -19,13 +19,28 @@
     [super viewDidLoad];
     
     _songManager = [SongManager getSharedInstance];
+    self.navigationController.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName : [UIColor whiteColor]};
     
     _tableView.delegate = self;
     _tableView.dataSource = self;
     _tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
 }
 
+- (void) setPlaylist:(NSMutableArray *)playlist{
+    _playlist = playlist;
+    [_tableView reloadData];
+}
+
+- (void) setPlaylistName:(NSString *)playlistName{
+    _playlistName = playlistName;
+    self.navigationItem.title = _playlistName;
+}
+
 #pragma mark - Actions
+
+- (IBAction) backMenuButtonPressed:(id)sender{
+    [self.navigationController popViewControllerAnimated:YES];
+}
 
 - (IBAction) backButtonPressed:(id)sender{
     [_songManager previousSong];
@@ -69,6 +84,9 @@
 
 - (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [_tableView deselectRowAtIndexPath:indexPath animated:YES];
+    [_songManager setCurrentPlaylist:_playlist];
+    [_songManager startTimer];
+    [_songManager playSongAtIndex:indexPath.row];
 }
 
 @end

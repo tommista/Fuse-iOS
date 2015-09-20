@@ -19,7 +19,7 @@
         if(tracks != nil && tracks.count > 0){
             NSDictionary *track = [tracks firstObject];
             _trackTitle = [track objectForKey:@"title"];
-            _trackId = [track objectForKey:@"sc_id"];
+            _trackId = [[track objectForKey:@"sc_id"] stringValue];
             _trackURL = [NSURL URLWithString:[track objectForKey:@"stream_url"]];
         }
         

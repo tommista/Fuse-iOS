@@ -17,6 +17,7 @@
 @property (strong, nonatomic) SpotifyPlayer *spotifyPlayer;
 @property (strong, nonatomic) SoundcloudPlayer *soundcloudPlayer;
 @property (strong, nonatomic) NSArray *currentPlaylist;
+@property (strong, nonatomic) NSString *playlistId;
 
 + (SongManager *) getSharedInstance;
 - (void) playSongAtIndex:(long)index;

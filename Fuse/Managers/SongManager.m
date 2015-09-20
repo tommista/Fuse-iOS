@@ -63,7 +63,7 @@
     
     [self pause];
     
-    [[NSNotificationCenter defaultCenter] postNotificationName:SONG_INDEX_NOTIFICATION object:nil userInfo:@{@"index" : [NSNumber numberWithLong:playingIndex]}];
+    NSString *uuid = @"";
     
     isPlaying = YES;
     
@@ -72,11 +72,13 @@
         SPTPartialTrack *spTrack = (SPTPartialTrack *) track;
         playingSource = SPOTIFY_PLAYING;
         [self sentIDToParse:spTrack.uri.absoluteString];
+        uuid = spTrack.uri;
         [_spotifyPlayer playSong:spTrack.uri];
     }else if ([[track class] isSubclassOfClass:[SoundcloudTrack class]]){// soundcloud track
         SoundcloudTrack *scTrack = (SoundcloudTrack *) track;
         playingSource = SOUNDCLOUD_PLAYING;
         [self sentIDToParse:scTrack.trackId];
+        uuid = scTrack.trackId;
         [_soundcloudPlayer playSong:scTrack.trackId];
     }else{ // Generic track
         GenericTrack *gTrack = (GenericTrack *) track;
@@ -84,8 +86,12 @@
         
         NSArray *parts = [gTrack.trackURL.absoluteString componentsSeparatedByString:@"/"];
         [self sentIDToParse:[parts objectAtIndex:4]];
+        
+        uuid = [parts objectAtIndex:4];
         [_soundcloudPlayer playSong:[parts objectAtIndex:4]];
     }
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:SONG_INDEX_NOTIFICATION object:nil userInfo:@{@"index" : [NSNumber numberWithLong:playingIndex], @"id" : uuid}];
 }
 
 - (void) playPause{

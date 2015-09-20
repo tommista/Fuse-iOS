@@ -13,6 +13,7 @@
 #import <AVFoundation/AVFoundation.h>
 #import "SongManager.h"
 #import "SoundcloudTrack.h"
+#import "GenericTrack.h"
 #import <SDWebImage/UIImageView+WebCache.h>
 
 @interface PlaylistViewController ()
@@ -44,11 +45,13 @@
 - (void) viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(playlistDeserialized) name:DESERIALIZATION_FINISHED object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(newSong:) name:SONG_INDEX_NOTIFICATION object:nil];
     ppTimer = [NSTimer scheduledTimerWithTimeInterval:0.25 target:self selector:@selector(ppTimerFired) userInfo:nil repeats:YES];
 }
 
 - (void) viewWillDisappear:(BOOL)animated{
     [[NSNotificationCenter defaultCenter] removeObserver:self name:DESERIALIZATION_FINISHED object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:SONG_INDEX_NOTIFICATION object:nil];
     [ppTimer invalidate];
     ppTimer = nil;
     [super viewWillDisappear:animated];
@@ -68,6 +71,19 @@
 
 - (void) playlistDeserialized{
     [_tableView reloadData];
+}
+
+- (void) newSong:(NSNotification *)notif{
+    NSString *uuid = [notif.userInfo objectForKey:@"id"];
+    for(int i = 0; i < playlist.count; i++){
+        id track = [_savedPlaylistManager.savedPlaylist objectAtIndex:i];
+        if([[track class] isSubclassOfClass:[SPTPartialTrack class]]){// spotify track
+            SPTPartialTrack *spTrack = (SPTPartialTrack *) track;
+        }else if ([[track class] isSubclassOfClass:[SoundcloudTrack class]]){// soundcloud track
+            SoundcloudTrack *scTrack = (SoundcloudTrack *) track;
+        }else{
+        }
+    }
 }
 
 #pragma mark - Actions
@@ -122,8 +138,10 @@
         SoundcloudTrack *scTrack = (SoundcloudTrack *) track;
         cell.textLabel.text = scTrack.trackName;
         cell.detailTextLabel.text = scTrack.artistName;
-    }else{
-        cell.textLabel.text = @"TBD";
+    }else if([[track class] isSubclassOfClass:[GenericTrack class]]){
+        GenericTrack *gTrack = (GenericTrack *)track;
+        cell.textLabel.text = gTrack.trackTitle;
+        cell.detailTextLabel.text = gTrack.artistTitle;
     }
     
     

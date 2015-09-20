@@ -20,6 +20,7 @@
     AFHTTPRequestOperationManager *afManager;
     SavedPlaylistManager *savedPlaylistManager;
     NSTimer *ppTimer;
+    unsigned long selectedRow;
 }
 @end
 
@@ -53,12 +54,42 @@
 - (void) viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     ppTimer = [NSTimer scheduledTimerWithTimeInterval:0.25 target:self selector:@selector(ppTimerFired) userInfo:nil repeats:YES];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(newSong:) name:SONG_INDEX_NOTIFICATION object:nil];
 }
 
 - (void) viewWillDisappear:(BOOL)animated{
     [ppTimer invalidate];
     ppTimer = nil;
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:SONG_INDEX_NOTIFICATION object:nil];
     [super viewWillDisappear:animated];
+}
+
+#pragma mark - Notifications
+
+- (void) newSong:(NSNotification *)notif{
+    NSString *uuid = [notif.userInfo objectForKey:@"id"];
+    for(int i = 0; i < songsArray.count; i++){
+        id track = [songsArray objectAtIndex:i];
+        NSString *trackId = @"";;
+        if([[track class] isSubclassOfClass:[SPTPartialTrack class]]){// spotify track
+            SPTPartialTrack *spTrack = (SPTPartialTrack *) track;
+            trackId = spTrack.uri.absoluteString;
+        }else if ([[track class] isSubclassOfClass:[SoundcloudTrack class]]){// soundcloud track
+            SoundcloudTrack *scTrack = (SoundcloudTrack *) track;
+            trackId = scTrack.trackId;
+        }/*else if([[track class] isSubclassOfClass:[GenericTrack class]]){
+            GenericTrack *gTrack = (GenericTrack *) track;
+            NSArray *parts = [gTrack.trackURL.absoluteString componentsSeparatedByString:@"/"];
+            trackId = [parts objectAtIndex:4];
+        }*/
+        
+        if([trackId isEqualToString:uuid] && i != selectedRow){
+            [_tableView deselectRowAtIndexPath:[NSIndexPath indexPathForRow:selectedRow inSection:0] animated:YES];
+            [_tableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:0] animated:YES scrollPosition:UITableViewScrollPositionNone];
+            selectedRow = i;
+            return;
+        }
+    }
 }
 
 #pragma mark - Timer
@@ -202,8 +233,7 @@
 #pragma mark - UITableViewDelegate
 
 - (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    
+    selectedRow = indexPath.row;
     [_songManager setCurrentPlaylist:[NSArray arrayWithObject:[songsArray objectAtIndex:indexPath.row]]];
     [_songManager startTimer];
     [_songManager playSongAtIndex:0];

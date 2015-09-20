@@ -7,7 +7,16 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "SongManager.h"
 
-@interface GenericPlaylistViewController : UIViewController
+@interface GenericPlaylistViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
+
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (strong, nonatomic) SongManager *songManager;
+@property (strong, nonatomic) NSMutableArray *playlist;
+
+- (IBAction) backButtonPressed:(id)sender;
+- (IBAction) playPauseButtonPressed:(id)sender;
+- (IBAction) nextButtonPressed:(id)sender;
 
 @end

@@ -27,6 +27,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    self.navigationItem.title = @"Search";
+    self.navigationController.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName : [UIColor whiteColor]};
+    
     _spotifyPlayer = [SpotifyPlayer getSharedPlayer];
     afManager = [AFHTTPRequestOperationManager manager];
     savedPlaylistManager = [SavedPlaylistManager getSharedInstance];
@@ -97,13 +100,17 @@
     
     if(cell == nil){
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:cellIdentifier];
-        cell.accessoryType = UITableViewCellAccessoryDetailButton;
+        cell.accessoryType = UITableViewCellAccessoryCheckmark;
     }
     
     NSObject *genericTrack = [songsArray objectAtIndex:indexPath.row];
     
+    NSArray *playlist = [savedPlaylistManager savedPlaylist];
+    NSString *trackId = @"";
+    
     if([genericTrack.class isSubclassOfClass:[SPTPartialTrack class]]){
         SPTPartialTrack *track = (SPTPartialTrack *) genericTrack;
+        trackId = track.uri.absoluteString;
         cell.textLabel.text = track.name;
         cell.detailTextLabel.text = ((SPTPartialArtist *)[track.artists objectAtIndex:0]).name;
         cell.backgroundColor = [UIColor greenColor];
@@ -112,6 +119,28 @@
         cell.textLabel.text = track.trackName;
         cell.detailTextLabel.text = track.artistName;
         cell.backgroundColor = [UIColor orangeColor];
+        trackId = track.trackId;
+    }
+    
+    bool saved = NO;
+    for(id gTrack in playlist){
+        NSString *genericID = @"";
+        if([[gTrack class] isSubclassOfClass:[SPTPartialTrack class]]){ // is spotify song
+            genericID = ((SPTPartialTrack *) gTrack).uri.absoluteString;
+        }else{ // is soundcloud song
+            genericID = ((SoundcloudTrack *)gTrack).trackId;
+        }
+        
+        if([genericID isEqualToString:trackId]){
+            saved = YES;
+            break;
+        }
+    }
+    
+    if(saved){
+        cell.tintColor = [UIColor blueColor];
+    }else{
+        cell.tintColor = [UIColor redColor];
     }
     
     return cell;

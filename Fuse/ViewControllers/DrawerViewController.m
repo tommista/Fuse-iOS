@@ -11,6 +11,7 @@
 #import <MMDrawerBarButtonItem.h>
 #import "SearchViewController.h"
 #import "PlaylistViewController.h"
+#import "DiscoveryViewController.h"
 
 @interface DrawerViewController ()
 {
@@ -82,7 +83,7 @@
         UIViewController *viewController;
         switch(indexPath.row){
             case 0:
-                
+                viewController = [[DiscoveryViewController alloc] initWithNibName:@"DiscoveryViewController" bundle:nil];
                 break;
             case 1:
                 viewController = [[SearchViewController alloc] initWithNibName:@"SearchViewController" bundle:nil];

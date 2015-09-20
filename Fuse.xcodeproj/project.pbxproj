@@ -25,6 +25,8 @@
 		0B7ED8761BAD49E3002F4DAC /* SoundcloudPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B7ED8751BAD49E3002F4DAC /* SoundcloudPlayer.m */; };
 		0B7ED87A1BAD4C07002F4DAC /* SongManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B7ED8791BAD4C07002F4DAC /* SongManager.m */; };
 		0B7ED87E1BAD5B1F002F4DAC /* SavedPlaylistManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B7ED87D1BAD5B1F002F4DAC /* SavedPlaylistManager.m */; };
+		0B7ED8821BAE1889002F4DAC /* DiscoveryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B7ED8801BAE1889002F4DAC /* DiscoveryViewController.m */; };
+		0B7ED8831BAE1889002F4DAC /* DiscoveryViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0B7ED8811BAE1889002F4DAC /* DiscoveryViewController.xib */; };
 		3E6BA756BD48AF08C53EA63D /* libPods-Fuse.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 907CFF891CCBC3679EC4B3D0 /* libPods-Fuse.a */; };
 /* End PBXBuildFile section */
 
@@ -72,6 +74,9 @@
 		0B7ED8791BAD4C07002F4DAC /* SongManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SongManager.m; path = Managers/SongManager.m; sourceTree = "<group>"; };
 		0B7ED87C1BAD5B1F002F4DAC /* SavedPlaylistManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SavedPlaylistManager.h; path = Managers/SavedPlaylistManager.h; sourceTree = "<group>"; };
 		0B7ED87D1BAD5B1F002F4DAC /* SavedPlaylistManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SavedPlaylistManager.m; path = Managers/SavedPlaylistManager.m; sourceTree = "<group>"; };
+		0B7ED87F1BAE1889002F4DAC /* DiscoveryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DiscoveryViewController.h; path = ViewControllers/DiscoveryViewController.h; sourceTree = "<group>"; };
+		0B7ED8801BAE1889002F4DAC /* DiscoveryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DiscoveryViewController.m; path = ViewControllers/DiscoveryViewController.m; sourceTree = "<group>"; };
+		0B7ED8811BAE1889002F4DAC /* DiscoveryViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = DiscoveryViewController.xib; path = ViewControllers/DiscoveryViewController.xib; sourceTree = "<group>"; };
 		907CFF891CCBC3679EC4B3D0 /* libPods-Fuse.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Fuse.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BEC5EAEA39425EBCC1D0691C /* Pods-Fuse.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Fuse.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Fuse/Pods-Fuse.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -173,6 +178,9 @@
 				0B7ED86B1BAD1CF7002F4DAC /* SearchViewController.h */,
 				0B7ED86C1BAD1CF7002F4DAC /* SearchViewController.m */,
 				0B7ED86D1BAD1CF7002F4DAC /* SearchViewController.xib */,
+				0B7ED87F1BAE1889002F4DAC /* DiscoveryViewController.h */,
+				0B7ED8801BAE1889002F4DAC /* DiscoveryViewController.m */,
+				0B7ED8811BAE1889002F4DAC /* DiscoveryViewController.xib */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -321,6 +329,7 @@
 				0B7ED8591BACF254002F4DAC /* DrawerViewController.xib in Resources */,
 				0B7ED86F1BAD1CF7002F4DAC /* SearchViewController.xib in Resources */,
 				0B462A5C1BACE69700B65D51 /* Images.xcassets in Resources */,
+				0B7ED8831BAE1889002F4DAC /* DiscoveryViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -377,6 +386,7 @@
 				0B7ED8581BACF254002F4DAC /* DrawerViewController.m in Sources */,
 				0B7ED86A1BAD18D7002F4DAC /* SpotifyPlayer.m in Sources */,
 				0B7ED87A1BAD4C07002F4DAC /* SongManager.m in Sources */,
+				0B7ED8821BAE1889002F4DAC /* DiscoveryViewController.m in Sources */,
 				0B462A541BACE69700B65D51 /* AppDelegate.m in Sources */,
 				0B7ED87E1BAD5B1F002F4DAC /* SavedPlaylistManager.m in Sources */,
 				0B7ED86E1BAD1CF7002F4DAC /* SearchViewController.m in Sources */,

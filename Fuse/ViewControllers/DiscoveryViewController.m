@@ -23,6 +23,7 @@
 @interface DiscoveryViewController (){
     unsigned long descrCount;
     NSMutableArray *tempArray;
+    NSTimer *ppTimer;
 }
 @end
 
@@ -39,6 +40,27 @@
     _tableView.dataSource = self;
     
     self.navigationItem.leftBarButtonItem = [[MMDrawerBarButtonItem alloc] initWithTarget:self action:@selector(menuButtonPressed:)];
+}
+
+- (void) viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    ppTimer = [NSTimer scheduledTimerWithTimeInterval:0.25 target:self selector:@selector(ppTimerFired) userInfo:nil repeats:YES];
+}
+
+- (void) viewWillDisappear:(BOOL)animated{
+    [ppTimer invalidate];
+    ppTimer = nil;
+    [super viewWillDisappear:animated];
+}
+
+#pragma mark - Timer
+
+- (void) ppTimerFired{
+    if(_songManager.isPlaying){
+        _ppButton.image = [UIImage imageNamed:@"pause.png"];
+    }else{
+        _ppButton.image = [UIImage imageNamed:@"play2.png"];
+    }
 }
 
 #pragma mark - Actions

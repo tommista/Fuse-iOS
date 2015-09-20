@@ -13,6 +13,7 @@
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (strong, nonatomic) SongManager *songManager;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *ppButton;
 
 - (IBAction) backButtonPressed:(id)sender;
 - (IBAction) playPauseButtonPressed:(id)sender;

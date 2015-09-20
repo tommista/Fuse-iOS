@@ -40,6 +40,7 @@
     _spotifyPlayer = [SpotifyPlayer getSharedPlayer];
     
     NSURL *loginURL = [[SPTAuth defaultInstance] loginURL];
+    NSLog(@"%@", loginURL.absoluteString);
     
     [application performSelector:@selector(openURL:)
                       withObject:loginURL afterDelay:0.1];

@@ -6,6 +6,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="GenericPlaylistViewController">
             <connections>
+                <outlet property="ppButton" destination="NWY-Js-v2Q" id="xmo-zE-iob"/>
                 <outlet property="tableView" destination="I1Y-eT-w1Y" id="X9F-dy-aGu"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -23,19 +24,22 @@
                     <rect key="frame" x="0.0" y="556" width="600" height="44"/>
                     <items>
                         <barButtonItem style="plain" systemItem="flexibleSpace" id="XdV-yO-Jn8"/>
-                        <barButtonItem title="B" id="RPS-yq-blS">
+                        <barButtonItem image="backward.png" id="RPS-yq-blS">
+                            <color key="tintColor" red="0.98431372549999996" green="0.46666666670000001" blue="0.33333333329999998" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
                                 <action selector="backButtonPressed:" destination="-1" id="bVr-On-XdY"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem style="plain" systemItem="flexibleSpace" id="KGB-Z4-d24"/>
-                        <barButtonItem title="PP" id="NWY-Js-v2Q">
+                        <barButtonItem image="play2.png" id="NWY-Js-v2Q">
+                            <color key="tintColor" red="0.98431372549999996" green="0.46666666670000001" blue="0.33333333329999998" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
                                 <action selector="playPauseButtonPressed:" destination="-1" id="7cq-Wl-X2D"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem style="plain" systemItem="flexibleSpace" id="2hJ-cy-da8"/>
-                        <barButtonItem title="F" id="8Nm-Yg-PpH">
+                        <barButtonItem image="forward2.png" id="8Nm-Yg-PpH">
+                            <color key="tintColor" red="0.98431372549999996" green="0.46666666670000001" blue="0.33333333329999998" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
                                 <action selector="nextButtonPressed:" destination="-1" id="6wb-tV-ryg"/>
                             </connections>
@@ -56,4 +60,9 @@
             </constraints>
         </view>
     </objects>
+    <resources>
+        <image name="backward.png" width="32" height="32"/>
+        <image name="forward2.png" width="32" height="32"/>
+        <image name="play2.png" width="32" height="32"/>
+    </resources>
 </document>

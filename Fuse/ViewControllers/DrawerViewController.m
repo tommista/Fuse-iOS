@@ -51,22 +51,28 @@
     }
     
     NSString *cellText = @"";
+    UIImage *image;
     
     switch(indexPath.row){
         case 0:
             cellText = @"Discovery";
+            image = [UIImage imageNamed:@"headphones.png"];
             break;
         case 1:
             cellText = @"Search";
+            image = [UIImage imageNamed:@"search.png"];
             break;
         case 2:
             cellText = @"Playlist";
+            image = [UIImage imageNamed:@"list2.png"];
             break;
         case 3:
             cellText = @"Options";
+            image = [UIImage imageNamed:@"cog.png"];
             break;
     }
     
+    cell.imageView.image = image;
     cell.textLabel.text = cellText;
     
     return cell;

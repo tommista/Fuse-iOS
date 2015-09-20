@@ -83,6 +83,17 @@
     }
 }
 
+- (IBAction) accessoryButtonPressed:(UIButton *)sender{
+    NSObject *genericTrack = [songsArray objectAtIndex:sender.tag];
+    if([genericTrack.class isSubclassOfClass:[SPTPartialTrack class]]){
+        SPTPartialTrack *track = (SPTPartialTrack *) genericTrack;
+        [savedPlaylistManager addSpotifyTrack:track];
+    }else{
+        SoundcloudTrack *track = (SoundcloudTrack *) genericTrack;
+        [savedPlaylistManager addSoundcloudTrack:track];
+    }
+}
+
 #pragma mark - UITableViewDataSource
 
 - (NSInteger) numberOfSectionsInTableView:(UITableView *)tableView{
@@ -100,7 +111,6 @@
     
     if(cell == nil){
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:cellIdentifier];
-        cell.accessoryType = UITableViewCellAccessoryCheckmark;
     }
     
     NSObject *genericTrack = [songsArray objectAtIndex:indexPath.row];
@@ -108,17 +118,22 @@
     NSArray *playlist = [savedPlaylistManager savedPlaylist];
     NSString *trackId = @"";
     
+    UIButton *button = [[UIButton alloc] init];
+    [button setImage:[UIImage imageNamed:@"IcnPlus"] forState:UIControlStateNormal];
+    button.tag = indexPath.row;
+    [button addTarget:self action:@selector(accessoryButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+    cell.accessoryView = button;
+    [cell.accessoryView setFrame:CGRectMake(0, 0, 24, 24)];
+    
     if([genericTrack.class isSubclassOfClass:[SPTPartialTrack class]]){
         SPTPartialTrack *track = (SPTPartialTrack *) genericTrack;
         trackId = track.uri.absoluteString;
         cell.textLabel.text = track.name;
         cell.detailTextLabel.text = ((SPTPartialArtist *)[track.artists objectAtIndex:0]).name;
-        cell.backgroundColor = [UIColor greenColor];
     }else{
         SoundcloudTrack *track = (SoundcloudTrack *) genericTrack;
         cell.textLabel.text = track.trackName;
         cell.detailTextLabel.text = track.artistName;
-        cell.backgroundColor = [UIColor orangeColor];
         trackId = track.trackId;
     }
     
@@ -152,7 +167,7 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
-- (void) tableView:(UITableView *)tableView accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *)indexPath{
+/*- (void) tableView:(UITableView *)tableView accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *)indexPath{
     NSObject *genericTrack = [songsArray objectAtIndex:indexPath.row];
     
     if([genericTrack.class isSubclassOfClass:[SPTPartialTrack class]]){
@@ -162,7 +177,7 @@
         SoundcloudTrack *track = (SoundcloudTrack *) genericTrack;
         [savedPlaylistManager addSoundcloudTrack:track];
     }
-}
+}*/
 
 #pragma mark - UISearchBarDelegate
 

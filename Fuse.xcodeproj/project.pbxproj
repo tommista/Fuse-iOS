@@ -36,6 +36,11 @@
 		0B7ED8B91BAE7EB4002F4DAC /* forward2.png in Resources */ = {isa = PBXBuildFile; fileRef = 0B7ED8B51BAE7EB4002F4DAC /* forward2.png */; };
 		0B7ED8BA1BAE7EB4002F4DAC /* pause.png in Resources */ = {isa = PBXBuildFile; fileRef = 0B7ED8B61BAE7EB4002F4DAC /* pause.png */; };
 		0B7ED8BB1BAE7EB4002F4DAC /* play2.png in Resources */ = {isa = PBXBuildFile; fileRef = 0B7ED8B71BAE7EB4002F4DAC /* play2.png */; };
+		0B7ED8C01BAE82B7002F4DAC /* cog.png in Resources */ = {isa = PBXBuildFile; fileRef = 0B7ED8BC1BAE82B7002F4DAC /* cog.png */; };
+		0B7ED8C11BAE82B7002F4DAC /* headphones.png in Resources */ = {isa = PBXBuildFile; fileRef = 0B7ED8BD1BAE82B7002F4DAC /* headphones.png */; };
+		0B7ED8C21BAE82B7002F4DAC /* list2.png in Resources */ = {isa = PBXBuildFile; fileRef = 0B7ED8BE1BAE82B7002F4DAC /* list2.png */; };
+		0B7ED8C31BAE82B7002F4DAC /* search.png in Resources */ = {isa = PBXBuildFile; fileRef = 0B7ED8BF1BAE82B7002F4DAC /* search.png */; };
+		0B7ED8C51BAE8960002F4DAC /* plus.png in Resources */ = {isa = PBXBuildFile; fileRef = 0B7ED8C41BAE8960002F4DAC /* plus.png */; };
 		3E6BA756BD48AF08C53EA63D /* libPods-Fuse.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 907CFF891CCBC3679EC4B3D0 /* libPods-Fuse.a */; };
 /* End PBXBuildFile section */
 
@@ -97,6 +102,11 @@
 		0B7ED8B51BAE7EB4002F4DAC /* forward2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = forward2.png; sourceTree = "<group>"; };
 		0B7ED8B61BAE7EB4002F4DAC /* pause.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pause.png; sourceTree = "<group>"; };
 		0B7ED8B71BAE7EB4002F4DAC /* play2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = play2.png; sourceTree = "<group>"; };
+		0B7ED8BC1BAE82B7002F4DAC /* cog.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cog.png; sourceTree = "<group>"; };
+		0B7ED8BD1BAE82B7002F4DAC /* headphones.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = headphones.png; sourceTree = "<group>"; };
+		0B7ED8BE1BAE82B7002F4DAC /* list2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = list2.png; sourceTree = "<group>"; };
+		0B7ED8BF1BAE82B7002F4DAC /* search.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = search.png; sourceTree = "<group>"; };
+		0B7ED8C41BAE8960002F4DAC /* plus.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = plus.png; sourceTree = "<group>"; };
 		907CFF891CCBC3679EC4B3D0 /* libPods-Fuse.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Fuse.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BEC5EAEA39425EBCC1D0691C /* Pods-Fuse.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Fuse.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Fuse/Pods-Fuse.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -255,6 +265,11 @@
 				0B7ED8B21BAE7DCB002F4DAC /* hype.png */,
 				0B7ED8B41BAE7EB4002F4DAC /* backward.png */,
 				0B7ED8B51BAE7EB4002F4DAC /* forward2.png */,
+				0B7ED8BC1BAE82B7002F4DAC /* cog.png */,
+				0B7ED8BD1BAE82B7002F4DAC /* headphones.png */,
+				0B7ED8C41BAE8960002F4DAC /* plus.png */,
+				0B7ED8BE1BAE82B7002F4DAC /* list2.png */,
+				0B7ED8BF1BAE82B7002F4DAC /* search.png */,
 				0B7ED8B61BAE7EB4002F4DAC /* pause.png */,
 				0B7ED8B71BAE7EB4002F4DAC /* play2.png */,
 				0B7ED8AE1BAE7BE0002F4DAC /* aroundMe.png */,
@@ -364,7 +379,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0B7ED8C11BAE82B7002F4DAC /* headphones.png in Resources */,
+				0B7ED8C51BAE8960002F4DAC /* plus.png in Resources */,
 				0B7ED85F1BAD041D002F4DAC /* PlaylistViewController.xib in Resources */,
+				0B7ED8C21BAE82B7002F4DAC /* list2.png in Resources */,
+				0B7ED8C31BAE82B7002F4DAC /* search.png in Resources */,
 				0B7ED8B31BAE7DCB002F4DAC /* hype.png in Resources */,
 				0B7ED8B91BAE7EB4002F4DAC /* forward2.png in Resources */,
 				0B7ED8AF1BAE7BE0002F4DAC /* aroundMe.png in Resources */,
@@ -373,6 +392,7 @@
 				0B7ED8B81BAE7EB4002F4DAC /* backward.png in Resources */,
 				0B7ED8901BAE5388002F4DAC /* GenericPlaylistViewController.xib in Resources */,
 				0B7ED8BB1BAE7EB4002F4DAC /* play2.png in Resources */,
+				0B7ED8C01BAE82B7002F4DAC /* cog.png in Resources */,
 				0B7ED86F1BAD1CF7002F4DAC /* SearchViewController.xib in Resources */,
 				0B462A5C1BACE69700B65D51 /* Images.xcassets in Resources */,
 				0B7ED8831BAE1889002F4DAC /* DiscoveryViewController.xib in Resources */,

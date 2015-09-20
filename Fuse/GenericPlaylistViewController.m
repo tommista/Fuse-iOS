@@ -10,8 +10,9 @@
 #import "GenericTrack.h"
 #import "SoundcloudTrack.h"
 
-@interface GenericPlaylistViewController ()
-
+@interface GenericPlaylistViewController (){
+    NSTimer *ppTimer;
+}
 @end
 
 @implementation GenericPlaylistViewController
@@ -25,6 +26,27 @@
     _tableView.delegate = self;
     _tableView.dataSource = self;
     _tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
+}
+
+- (void) viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    ppTimer = [NSTimer scheduledTimerWithTimeInterval:0.25 target:self selector:@selector(ppTimerFired) userInfo:nil repeats:YES];
+}
+
+- (void) viewWillDisappear:(BOOL)animated{
+    [ppTimer invalidate];
+    ppTimer = nil;
+    [super viewWillDisappear:animated];
+}
+
+#pragma mark - Timer
+
+- (void) ppTimerFired{
+    if(_songManager.isPlaying){
+        _ppButton.image = [UIImage imageNamed:@"pause.png"];
+    }else{
+        _ppButton.image = [UIImage imageNamed:@"play2.png"];
+    }
 }
 
 - (void) setPlaylist:(NSMutableArray *)playlist{

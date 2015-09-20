@@ -45,6 +45,7 @@
     
     _searchBar.placeholder = @"Enter Track Name";
     _searchBar.delegate = self;
+    _searchBar.showsCancelButton = YES;
     
     self.navigationItem.leftBarButtonItem = [[MMDrawerBarButtonItem alloc] initWithTarget:self action:@selector(menuButtonPressed:)];
 }
@@ -147,6 +148,7 @@
     
     if(cell == nil){
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:cellIdentifier];
+        cell.textLabel.font = [UIFont boldSystemFontOfSize:14.0];
     }
     
     NSObject *genericTrack = [songsArray objectAtIndex:indexPath.row];
@@ -204,20 +206,8 @@
     
     [_songManager setCurrentPlaylist:[NSArray arrayWithObject:[songsArray objectAtIndex:indexPath.row]]];
     [_songManager startTimer];
-    [_songManager playSongAtIndex:indexPath.row];
+    [_songManager playSongAtIndex:0];
 }
-
-/*- (void) tableView:(UITableView *)tableView accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *)indexPath{
-    NSObject *genericTrack = [songsArray objectAtIndex:indexPath.row];
-    
-    if([genericTrack.class isSubclassOfClass:[SPTPartialTrack class]]){
-        SPTPartialTrack *track = (SPTPartialTrack *) genericTrack;
-        [savedPlaylistManager addSpotifyTrack:track];
-    }else{
-        SoundcloudTrack *track = (SoundcloudTrack *) genericTrack;
-        [savedPlaylistManager addSoundcloudTrack:track];
-    }
-}*/
 
 #pragma mark - UISearchBarDelegate
 
@@ -229,6 +219,10 @@
         [self getSoundcloudResultsForString:searchBar.text];
         //[_tableView reloadData];
     }];
+}
+
+- (void) searchBarCancelButtonClicked:(UISearchBar *)searchBar{
+    [_searchBar resignFirstResponder];
 }
 
 @end

@@ -110,6 +110,7 @@
     
     if(cell == nil){
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:cellIdentifier];
+        cell.textLabel.font = [UIFont boldSystemFontOfSize:14.0];
     }
     
     id track = [_savedPlaylistManager.savedPlaylist objectAtIndex:indexPath.row];

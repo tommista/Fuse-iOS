@@ -45,11 +45,12 @@
                       withObject:loginURL afterDelay:0.1];
     
     DrawerViewController *drawerViewController = [[DrawerViewController alloc] initWithNibName:@"DrawerViewController" bundle:nil];
+    UINavigationController *drawerNav = [[UINavigationController alloc] initWithRootViewController:drawerViewController];
     
     PlaylistViewController *middleViewController = [[PlaylistViewController alloc] initWithNibName:@"PlaylistViewController" bundle:nil];
     UINavigationController *middleNav = [[UINavigationController alloc] initWithRootViewController:middleViewController];
     
-    _drawerController = [[MMDrawerController alloc] initWithCenterViewController:middleNav leftDrawerViewController:drawerViewController];
+    _drawerController = [[MMDrawerController alloc] initWithCenterViewController:middleNav leftDrawerViewController:drawerNav];
     _drawerController.openDrawerGestureModeMask = (MMOpenDrawerGestureModePanningCenterView);
     _drawerController.closeDrawerGestureModeMask = (MMCloseDrawerGestureModePanningDrawerView | MMCloseDrawerGestureModePanningCenterView);
     self.window.rootViewController = _drawerController;

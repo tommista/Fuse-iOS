@@ -9,9 +9,11 @@
 #import "GenericPlaylistViewController.h"
 #import "GenericTrack.h"
 #import "SoundcloudTrack.h"
+#import "SavedPlaylistManager.h"
 
 @interface GenericPlaylistViewController (){
     NSTimer *ppTimer;
+    SavedPlaylistManager *savedPlaylistManager;
 }
 @end
 
@@ -21,6 +23,8 @@
     [super viewDidLoad];
     
     _songManager = [SongManager getSharedInstance];
+    savedPlaylistManager = [SavedPlaylistManager getSharedInstance];
+    
     self.navigationController.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName : [UIColor whiteColor]};
     
     _tableView.delegate = self;
@@ -65,6 +69,17 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 
+- (IBAction) accessoryButtonPressed:(UIButton *)sender{
+    NSObject *genericTrack = [_playlist objectAtIndex:sender.tag];
+    if([genericTrack.class isSubclassOfClass:[SPTPartialTrack class]]){
+        SPTPartialTrack *track = (SPTPartialTrack *) genericTrack;
+        [savedPlaylistManager addSpotifyTrack:track];
+    }else{
+        SoundcloudTrack *track = (SoundcloudTrack *) genericTrack;
+        [savedPlaylistManager addSoundcloudTrack:track];
+    }
+}
+
 - (IBAction) backButtonPressed:(id)sender{
     [_songManager previousSong];
 }
@@ -94,9 +109,17 @@
     
     if(cell == nil){
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:genericCellIdentifier];
+        cell.textLabel.font = [UIFont boldSystemFontOfSize:14.0];
     }
     
     id genTrack = [_playlist objectAtIndex:indexPath.row];
+    
+    UIButton *button = [[UIButton alloc] init];
+    [button setImage:[UIImage imageNamed:@"IcnPlus"] forState:UIControlStateNormal];
+    button.tag = indexPath.row;
+    [button addTarget:self action:@selector(accessoryButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+    cell.accessoryView = button;
+    [cell.accessoryView setFrame:CGRectMake(0, 0, 24, 24)];
     
     if([[genTrack class] isSubclassOfClass:[SPTPartialTrack class]]){
         SPTPartialTrack *track = (SPTPartialTrack *)genTrack;

@@ -8,6 +8,7 @@
 
 #import "SavedPlaylistManager.h"
 #import "Secrets.h"
+#import "GenericTrack.h"
 
 #define SAVED_DATA_KEY @"saved_data_key"
 
@@ -44,8 +45,11 @@
         if([[anonTrack class] isSubclassOfClass:[SPTPartialTrack class]]){ // spotify track
             str = [str stringByAppendingString: ((SPTPartialTrack *)anonTrack).uri.absoluteString];
             str = [str stringByAppendingString:@"@"];
-        }else{ // soundcloud track
+        }else if([[anonTrack class] isSubclassOfClass:[SoundcloudTrack class]]){ // soundcloud track
             str = [str stringByAppendingString: ((SoundcloudTrack *)anonTrack).trackId];
+            str = [str stringByAppendingString:@"@"];
+        }else{// generic track]
+            str = [str stringByAppendingString: ((GenericTrack *) anonTrack).trackId];
             str = [str stringByAppendingString:@"@"];
         }
     }
@@ -104,6 +108,11 @@
 }
 
 - (void) addSoundcloudTrack:(SoundcloudTrack *)track{
+    [_savedPlaylist addObject:track];
+    [self serialize];
+}
+
+- (void) addGenericTrack:(GenericTrack *)track{
     [_savedPlaylist addObject:track];
     [self serialize];
 }

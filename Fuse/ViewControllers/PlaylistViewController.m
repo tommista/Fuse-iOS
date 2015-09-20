@@ -28,6 +28,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    self.navigationItem.title = @"Your Playlist";
+    self.navigationController.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName : [UIColor whiteColor]};
+    
     _songManager = [SongManager getSharedInstance];
     _savedPlaylistManager = [SavedPlaylistManager getSharedInstance];
     

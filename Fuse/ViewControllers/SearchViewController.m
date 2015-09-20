@@ -19,6 +19,7 @@
     NSMutableArray *songsArray;
     AFHTTPRequestOperationManager *afManager;
     SavedPlaylistManager *savedPlaylistManager;
+    NSTimer *ppTimer;
 }
 @end
 
@@ -26,6 +27,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    _songManager = [SongManager getSharedInstance];
     
     self.navigationItem.title = @"Search";
     self.navigationController.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName : [UIColor whiteColor]};
@@ -44,6 +47,27 @@
     _searchBar.delegate = self;
     
     self.navigationItem.leftBarButtonItem = [[MMDrawerBarButtonItem alloc] initWithTarget:self action:@selector(menuButtonPressed:)];
+}
+
+- (void) viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    ppTimer = [NSTimer scheduledTimerWithTimeInterval:0.25 target:self selector:@selector(ppTimerFired) userInfo:nil repeats:YES];
+}
+
+- (void) viewWillDisappear:(BOOL)animated{
+    [ppTimer invalidate];
+    ppTimer = nil;
+    [super viewWillDisappear:animated];
+}
+
+#pragma mark - Timer
+
+- (void) ppTimerFired{
+    if(_songManager.isPlaying){
+        _ppButton.image = [UIImage imageNamed:@"pause.png"];
+    }else{
+        _ppButton.image = [UIImage imageNamed:@"play2.png"];
+    }
 }
 
 - (void) getSoundcloudResultsForString:(NSString *)searchString{
@@ -92,6 +116,18 @@
         SoundcloudTrack *track = (SoundcloudTrack *) genericTrack;
         [savedPlaylistManager addSoundcloudTrack:track];
     }
+}
+
+- (IBAction) backButtonPressed:(id)sender{
+    [_songManager previousSong];
+}
+
+- (IBAction) playPauseButtonPressed:(id)sender{
+    [_songManager playPause];
+}
+
+- (IBAction) nextButtonPressed:(id)sender{
+    [_songManager nextSong];
 }
 
 #pragma mark - UITableViewDataSource
@@ -165,6 +201,10 @@
 
 - (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+    [_songManager setCurrentPlaylist:[NSArray arrayWithObject:[songsArray objectAtIndex:indexPath.row]]];
+    [_songManager startTimer];
+    [_songManager playSongAtIndex:indexPath.row];
 }
 
 /*- (void) tableView:(UITableView *)tableView accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *)indexPath{

@@ -24,6 +24,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    self.navigationItem.title = @"Fuse";
+    self.navigationController.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName : [UIColor whiteColor]};
+    
     selectedRow = 2;
     
     _tableView.dataSource = self;
@@ -73,6 +76,7 @@
     }
     
     cell.imageView.image = image;
+    cell.imageView.frame = CGRectMake(0, 0, 24, 24);
     cell.textLabel.text = cellText;
     
     return cell;

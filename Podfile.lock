@@ -20,6 +20,7 @@ PODS:
   - AFNetworking/UIKit (2.6.0):
     - AFNetworking/NSURLConnection
     - AFNetworking/NSURLSession
+  - Bolts/Tasks (1.2.2)
   - MMDrawerController (0.5.7):
     - MMDrawerController/Core (= 0.5.7)
     - MMDrawerController/MMDrawerBarButtonItem (= 0.5.7)
@@ -32,6 +33,8 @@ PODS:
     - MMDrawerController/Core
   - MMDrawerController/Subclass (0.5.7):
     - MMDrawerController/Core
+  - Parse (1.8.5):
+    - Bolts/Tasks (>= 1.2.2)
   - SDWebImage (3.7.3):
     - SDWebImage/Core (= 3.7.3)
   - SDWebImage/Core (3.7.3)
@@ -39,11 +42,14 @@ PODS:
 DEPENDENCIES:
   - AFNetworking (~> 2.0)
   - MMDrawerController (~> 0.5.7)
+  - Parse
   - SDWebImage (~> 3.7)
 
 SPEC CHECKSUMS:
   AFNetworking: 79f7eb1a0fcfa7beb409332b2ca49afe9ce53b05
+  Bolts: 20a2bd788273360cb1e31530dc19b8544eef2544
   MMDrawerController: 7a4cf8e25596bf2434e03ce50d22a8608ddee6a1
+  Parse: 17ad8e0677ed682f7f00503860fcda0f4eb74168
   SDWebImage: 1d2b1a1efda1ade1b00b6f8498865f8ddedc8a84
 
 COCOAPODS: 0.38.2

@@ -8,6 +8,7 @@
 
 #import "GenericPlaylistViewController.h"
 #import "GenericTrack.h"
+#import "SoundcloudTrack.h"
 
 @interface GenericPlaylistViewController ()
 
@@ -73,9 +74,17 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:genericCellIdentifier];
     }
     
-    GenericTrack *track = [_playlist objectAtIndex:indexPath.row];
-    cell.textLabel.text = track.trackTitle;
-    cell.detailTextLabel.text = track.artistTitle;
+    id genTrack = [_playlist objectAtIndex:indexPath.row];
+    
+    if([[genTrack class] isSubclassOfClass:[SPTPartialTrack class]]){
+        
+    }else if([[genTrack class] isSubclassOfClass:[SoundcloudTrack class]]){
+        
+    }else{
+        GenericTrack *track = [_playlist objectAtIndex:indexPath.row];
+        cell.textLabel.text = track.trackTitle;
+        cell.detailTextLabel.text = track.artistTitle;
+    }
     
     return cell;
 }

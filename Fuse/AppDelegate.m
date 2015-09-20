@@ -12,6 +12,7 @@
 #import "PlaylistViewController.h"
 #import <Spotify/SPTAuth.h>
 #import "Secrets.h"
+#import <Parse/Parse.h>
 
 #define UIColorFromRGB(rgbValue) [UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16))/255.0 green:((float)((rgbValue & 0xFF00) >> 8))/255.0 blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
 
@@ -24,6 +25,9 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    
+    [Parse enableLocalDatastore];
+    [Parse setApplicationId:PARSE_APP_ID clientKey:PARSE_CLIENT_KEY];
     
     [UINavigationBar appearance].barTintColor = UIColorFromRGB(0xF97242);
     [UINavigationBar appearance].tintColor = UIColorFromRGB(0xEEEEEE);

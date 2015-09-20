@@ -12,12 +12,17 @@
 #import "GenericTrack.h"
 #import <AFNetworking/AFNetworking.h>
 #import "GenericPlaylistViewController.h"
+#import <Parse/Parse.h>
+#import "Secrets.h"
+#import "SoundcloudTrack.h"
 
 #define AROUND_ME 0
 #define HYPE_MACHINE 1
 
-@interface DiscoveryViewController ()
-
+@interface DiscoveryViewController (){
+    unsigned long descrCount;
+    NSMutableArray *tempArray;
+}
 @end
 
 @implementation DiscoveryViewController
@@ -97,7 +102,36 @@
     
     switch(indexPath.row){
         case AROUND_ME:{
-            
+            PFQuery *query = [PFQuery queryWithClassName:@"Track"];
+            tempArray = [[NSMutableArray alloc] init];
+            [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+                if (!error) {
+                    descrCount = objects.count;
+                    for(int i = 0; i < objects.count; i++){
+                        [tempArray addObject:[[NSString alloc] init]];
+                        NSString *trackId = [objects objectAtIndex:i];
+                        if([trackId hasPrefix:@"spotify"]){ // is a spotify track
+                            [SPTTrack trackWithURI:[NSURL URLWithString:trackId] session:nil callback:^(NSError *error, SPTTrack *object) {
+                                [tempArray replaceObjectAtIndex:i withObject:object];
+                                [self decrementDescrCount];
+                            }];
+                        }else{ //  is a soundcloud track
+                            NSDictionary *parameters = @{@"client_id" : SOUNDCLOUD_CLIENT_ID};
+                            AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+                            [manager.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+                            [manager GET:[NSString stringWithFormat:@"http://api.soundcloud.com/tracks/%@", trackId] parameters:parameters success:^(AFHTTPRequestOperation *operation, NSDictionary *responseObject) {
+                                SoundcloudTrack *sctrack = [[SoundcloudTrack alloc] initWithJSON:responseObject];
+                                [tempArray replaceObjectAtIndex:i withObject:sctrack];
+                                [self decrementDescrCount];
+                            } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                                NSLog(@"Error: %@", error);
+                            }];
+                        }
+                    }
+                } else {
+                    NSLog(@"Error: %@ %@", error, [error userInfo]);
+                }
+            }];
         }break;
         case HYPE_MACHINE:{
             NSDictionary *parameters = @{@"type" : @"premieres", @"key" : @"swagger"};
@@ -124,6 +158,19 @@
 
 - (void) tableView:(UITableView *)tableView accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *)indexPath{
     [self tableView:tableView didSelectRowAtIndexPath:indexPath];
+}
+
+#pragma mark - boring crap
+
+- (void) decrementDescrCount{
+    descrCount--;
+    if(descrCount == 0){
+        GenericPlaylistViewController *vc = [[GenericPlaylistViewController alloc] init];
+        vc.playlistName = @"Around Me";
+        vc.playlist = tempArray;
+        [self.navigationController pushViewController:vc animated:YES];
+    }
+    
 }
 
 @end

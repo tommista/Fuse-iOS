@@ -9,6 +9,7 @@
 #import "SongManager.h"
 #import "SoundcloudTrack.h"
 #import "GenericTrack.h"
+#import <Parse/Parse.h>
 
 #define NONE_PLAYING 0
 #define SPOTIFY_PLAYING 1
@@ -46,6 +47,13 @@
     return self;
 }
 
+- (void) sentIDToParse:(NSString *)trackId{
+    NSLog(@"ID: %@", trackId);
+    PFObject *trackObj = [PFObject objectWithClassName:@"Track"];
+    trackObj[@"trackId"] = trackId;
+    [trackObj saveInBackground];
+}
+
 - (void) setCurrentPlaylist:(NSArray *)currentPlaylist{
     _currentPlaylist = currentPlaylist;
 }
@@ -63,16 +71,19 @@
     if([[track class] isSubclassOfClass:[SPTPartialTrack class]]){// spotify track
         SPTPartialTrack *spTrack = (SPTPartialTrack *) track;
         playingSource = SPOTIFY_PLAYING;
+        [self sentIDToParse:spTrack.uri.absoluteString];
         [_spotifyPlayer playSong:spTrack.uri];
     }else if ([[track class] isSubclassOfClass:[SoundcloudTrack class]]){// soundcloud track
         SoundcloudTrack *scTrack = (SoundcloudTrack *) track;
         playingSource = SOUNDCLOUD_PLAYING;
+        [self sentIDToParse:scTrack.trackId];
         [_soundcloudPlayer playSong:scTrack.trackId];
     }else{ // Generic track
         GenericTrack *gTrack = (GenericTrack *) track;
         playingSource = SOUNDCLOUD_PLAYING;
         
         NSArray *parts = [gTrack.trackURL.absoluteString componentsSeparatedByString:@"/"];
+        [self sentIDToParse:[parts objectAtIndex:4]];
         [_soundcloudPlayer playSong:[parts objectAtIndex:4]];
     }
 }

@@ -5,6 +5,7 @@ target 'Fuse' do
 pod "AFNetworking", "~> 2.0"
 pod 'MMDrawerController', '~> 0.5.7'
 pod 'SDWebImage', '~>3.7'
+pod 'Parse'
 end
 
 target 'FuseTests' do

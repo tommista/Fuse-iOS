@@ -143,7 +143,7 @@
                         }else{ //  is a soundcloud track
                             NSDictionary *parameters = @{@"client_id" : SOUNDCLOUD_CLIENT_ID};
                             AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-                            [manager.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+                            [manager.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Accept"];
                             [manager GET:[NSString stringWithFormat:@"http://api.soundcloud.com/tracks/%@", trackId] parameters:parameters success:^(AFHTTPRequestOperation *operation, NSDictionary *responseObject) {
                                 SoundcloudTrack *sctrack = [[SoundcloudTrack alloc] initWithJSON:responseObject];
                                 [tempArray replaceObjectAtIndex:i withObject:sctrack];

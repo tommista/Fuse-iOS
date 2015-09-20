@@ -6,6 +6,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PlaylistViewController">
             <connections>
+                <outlet property="ppButton" destination="1a9-mF-Lf4" id="Diu-TH-pwc"/>
                 <outlet property="tableView" destination="aqx-ps-SEX" id="kl4-k6-BHT"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -23,19 +24,22 @@
                     <rect key="frame" x="0.0" y="556" width="600" height="44"/>
                     <items>
                         <barButtonItem style="plain" systemItem="flexibleSpace" id="UPL-97-56b"/>
-                        <barButtonItem title="B" id="nZH-q7-Lax">
+                        <barButtonItem image="backward.png" id="nZH-q7-Lax">
+                            <color key="tintColor" red="0.98431372549999996" green="0.46666666670000001" blue="0.33333333329999998" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
                                 <action selector="backButtonPressed:" destination="-1" id="dxz-lK-zIL"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem style="plain" systemItem="flexibleSpace" id="e6S-Ty-HTa"/>
-                        <barButtonItem title="PP" id="1a9-mF-Lf4">
+                        <barButtonItem image="play2.png" id="1a9-mF-Lf4">
+                            <color key="tintColor" red="0.98431372549999996" green="0.46666666670000001" blue="0.33333333329999998" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
                                 <action selector="playPauseButtonPressed:" destination="-1" id="qac-IY-e3M"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem style="plain" systemItem="flexibleSpace" id="Thk-yv-qrV"/>
-                        <barButtonItem title="F" id="mzJ-WC-UOd">
+                        <barButtonItem image="forward2.png" id="mzJ-WC-UOd">
+                            <color key="tintColor" red="0.98431372549999996" green="0.46666666670000001" blue="0.33333333329999998" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
                                 <action selector="nextButtonPressed:" destination="-1" id="oqI-68-vUZ"/>
                             </connections>
@@ -57,4 +61,9 @@
         </view>
         <barButtonItem style="plain" systemItem="flexibleSpace" id="qNo-rU-aMi"/>
     </objects>
+    <resources>
+        <image name="backward.png" width="32" height="32"/>
+        <image name="forward2.png" width="32" height="32"/>
+        <image name="play2.png" width="32" height="32"/>
+    </resources>
 </document>

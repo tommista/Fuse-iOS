@@ -30,6 +30,12 @@
 		0B7ED8861BAE4995002F4DAC /* GenericTrack.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B7ED8851BAE4995002F4DAC /* GenericTrack.m */; };
 		0B7ED88F1BAE5388002F4DAC /* GenericPlaylistViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B7ED88D1BAE5388002F4DAC /* GenericPlaylistViewController.m */; };
 		0B7ED8901BAE5388002F4DAC /* GenericPlaylistViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0B7ED88E1BAE5388002F4DAC /* GenericPlaylistViewController.xib */; };
+		0B7ED8AF1BAE7BE0002F4DAC /* aroundMe.png in Resources */ = {isa = PBXBuildFile; fileRef = 0B7ED8AE1BAE7BE0002F4DAC /* aroundMe.png */; };
+		0B7ED8B31BAE7DCB002F4DAC /* hype.png in Resources */ = {isa = PBXBuildFile; fileRef = 0B7ED8B21BAE7DCB002F4DAC /* hype.png */; };
+		0B7ED8B81BAE7EB4002F4DAC /* backward.png in Resources */ = {isa = PBXBuildFile; fileRef = 0B7ED8B41BAE7EB4002F4DAC /* backward.png */; };
+		0B7ED8B91BAE7EB4002F4DAC /* forward2.png in Resources */ = {isa = PBXBuildFile; fileRef = 0B7ED8B51BAE7EB4002F4DAC /* forward2.png */; };
+		0B7ED8BA1BAE7EB4002F4DAC /* pause.png in Resources */ = {isa = PBXBuildFile; fileRef = 0B7ED8B61BAE7EB4002F4DAC /* pause.png */; };
+		0B7ED8BB1BAE7EB4002F4DAC /* play2.png in Resources */ = {isa = PBXBuildFile; fileRef = 0B7ED8B71BAE7EB4002F4DAC /* play2.png */; };
 		3E6BA756BD48AF08C53EA63D /* libPods-Fuse.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 907CFF891CCBC3679EC4B3D0 /* libPods-Fuse.a */; };
 /* End PBXBuildFile section */
 
@@ -85,6 +91,12 @@
 		0B7ED88C1BAE5388002F4DAC /* GenericPlaylistViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GenericPlaylistViewController.h; sourceTree = "<group>"; };
 		0B7ED88D1BAE5388002F4DAC /* GenericPlaylistViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GenericPlaylistViewController.m; sourceTree = "<group>"; };
 		0B7ED88E1BAE5388002F4DAC /* GenericPlaylistViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GenericPlaylistViewController.xib; sourceTree = "<group>"; };
+		0B7ED8AE1BAE7BE0002F4DAC /* aroundMe.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = aroundMe.png; sourceTree = "<group>"; };
+		0B7ED8B21BAE7DCB002F4DAC /* hype.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = hype.png; sourceTree = "<group>"; };
+		0B7ED8B41BAE7EB4002F4DAC /* backward.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = backward.png; sourceTree = "<group>"; };
+		0B7ED8B51BAE7EB4002F4DAC /* forward2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = forward2.png; sourceTree = "<group>"; };
+		0B7ED8B61BAE7EB4002F4DAC /* pause.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pause.png; sourceTree = "<group>"; };
+		0B7ED8B71BAE7EB4002F4DAC /* play2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = play2.png; sourceTree = "<group>"; };
 		907CFF891CCBC3679EC4B3D0 /* libPods-Fuse.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Fuse.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BEC5EAEA39425EBCC1D0691C /* Pods-Fuse.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Fuse.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Fuse/Pods-Fuse.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -151,6 +163,7 @@
 		0B462A4E1BACE69700B65D51 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				0B7ED8AB1BAE7B25002F4DAC /* Images */,
 				0B462A4F1BACE69700B65D51 /* Info.plist */,
 				0B462A501BACE69700B65D51 /* main.m */,
 			);
@@ -234,6 +247,19 @@
 			children = (
 			);
 			name = Views;
+			sourceTree = "<group>";
+		};
+		0B7ED8AB1BAE7B25002F4DAC /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				0B7ED8B21BAE7DCB002F4DAC /* hype.png */,
+				0B7ED8B41BAE7EB4002F4DAC /* backward.png */,
+				0B7ED8B51BAE7EB4002F4DAC /* forward2.png */,
+				0B7ED8B61BAE7EB4002F4DAC /* pause.png */,
+				0B7ED8B71BAE7EB4002F4DAC /* play2.png */,
+				0B7ED8AE1BAE7BE0002F4DAC /* aroundMe.png */,
+			);
+			name = Images;
 			sourceTree = "<group>";
 		};
 		5718902496E4812ACDEA7532 /* Pods */ = {
@@ -339,8 +365,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				0B7ED85F1BAD041D002F4DAC /* PlaylistViewController.xib in Resources */,
+				0B7ED8B31BAE7DCB002F4DAC /* hype.png in Resources */,
+				0B7ED8B91BAE7EB4002F4DAC /* forward2.png in Resources */,
+				0B7ED8AF1BAE7BE0002F4DAC /* aroundMe.png in Resources */,
+				0B7ED8BA1BAE7EB4002F4DAC /* pause.png in Resources */,
 				0B7ED8591BACF254002F4DAC /* DrawerViewController.xib in Resources */,
+				0B7ED8B81BAE7EB4002F4DAC /* backward.png in Resources */,
 				0B7ED8901BAE5388002F4DAC /* GenericPlaylistViewController.xib in Resources */,
+				0B7ED8BB1BAE7EB4002F4DAC /* play2.png in Resources */,
 				0B7ED86F1BAD1CF7002F4DAC /* SearchViewController.xib in Resources */,
 				0B462A5C1BACE69700B65D51 /* Images.xcassets in Resources */,
 				0B7ED8831BAE1889002F4DAC /* DiscoveryViewController.xib in Resources */,

@@ -18,6 +18,7 @@
 @property (weak, nonatomic) IBOutlet UIToolbar *toolbar;
 @property (strong, nonatomic) SavedPlaylistManager *savedPlaylistManager;
 @property (strong, nonatomic) SongManager *songManager;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *ppButton;
 
 - (IBAction) backButtonPressed:(id)sender;
 - (IBAction) playPauseButtonPressed:(id)sender;

@@ -16,4 +16,5 @@
 @property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
 @property (strong, nonatomic) SpotifyPlayer *spotifyPlayer;
 
+
 @end

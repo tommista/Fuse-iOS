@@ -15,6 +15,7 @@
 #import <Parse/Parse.h>
 #import "Secrets.h"
 #import "SoundcloudTrack.h"
+#import <SDWebImage/UIImageView+WebCache.h>
 
 #define AROUND_ME 0
 #define HYPE_MACHINE 1
@@ -84,11 +85,13 @@
     }
     
     switch(indexPath.row){
-        case AROUND_ME:
+        case AROUND_ME:{
             cell.textLabel.text = @"Around Me";
-            break;
+            cell.imageView.image = [UIImage imageNamed:@"icn_location_dark"];
+        }break;
         case HYPE_MACHINE:
             cell.textLabel.text = @"Hype Machine: Featured";
+            cell.imageView.image = [UIImage imageNamed:@"hype.png"];
             break;
     }
     

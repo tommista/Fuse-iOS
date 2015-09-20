@@ -109,11 +109,11 @@
     switch(indexPath.row){
         case AROUND_ME:{
             cell.textLabel.text = @"Around Me";
-            cell.imageView.image = [UIImage imageNamed:@"icn_location_dark"];
+            cell.imageView.image = [UIImage imageNamed:@"location.png"];
         }break;
         case HYPE_MACHINE:
             cell.textLabel.text = @"Hype Machine: Featured";
-            cell.imageView.image = [UIImage imageNamed:@"hype.png"];
+            cell.imageView.image = [UIImage imageNamed:@"heart.png"];
             break;
     }
     

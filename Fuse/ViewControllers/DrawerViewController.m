@@ -41,7 +41,7 @@
 }
 
 - (NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return 4;
+    return 3;
 }
 
 - (UITableViewCell *) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -68,10 +68,6 @@
         case 2:
             cellText = @"Playlist";
             image = [UIImage imageNamed:@"list2.png"];
-            break;
-        case 3:
-            cellText = @"Options";
-            image = [UIImage imageNamed:@"cog.png"];
             break;
     }
     
@@ -100,8 +96,6 @@
                 break;
             case 2:
                 viewController = [[PlaylistViewController alloc] initWithNibName:@"PlaylistViewController" bundle:nil];
-                break;
-            case 3:
                 break;
         }
         

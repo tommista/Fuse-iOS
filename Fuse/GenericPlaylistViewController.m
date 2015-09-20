@@ -77,11 +77,15 @@
     id genTrack = [_playlist objectAtIndex:indexPath.row];
     
     if([[genTrack class] isSubclassOfClass:[SPTPartialTrack class]]){
-        
+        SPTPartialTrack *track = (SPTPartialTrack *)genTrack;
+        cell.textLabel.text = track.name;
+        cell.detailTextLabel.text = [track.artists[0] name];
     }else if([[genTrack class] isSubclassOfClass:[SoundcloudTrack class]]){
-        
+        SoundcloudTrack *track = (SoundcloudTrack *) genTrack;
+        cell.textLabel.text = track.trackName;
+        cell.detailTextLabel.text = track.artistName;
     }else{
-        GenericTrack *track = [_playlist objectAtIndex:indexPath.row];
+        GenericTrack *track = (GenericTrack *) genTrack;
         cell.textLabel.text = track.trackTitle;
         cell.detailTextLabel.text = track.artistTitle;
     }

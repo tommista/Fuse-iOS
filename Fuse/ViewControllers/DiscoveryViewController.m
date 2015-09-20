@@ -109,7 +109,7 @@
                     descrCount = objects.count;
                     for(int i = 0; i < objects.count; i++){
                         [tempArray addObject:[[NSString alloc] init]];
-                        NSString *trackId = [objects objectAtIndex:i];
+                        NSString *trackId = [[objects objectAtIndex:i] objectForKey:@"trackId"];
                         if([trackId hasPrefix:@"spotify"]){ // is a spotify track
                             [SPTTrack trackWithURI:[NSURL URLWithString:trackId] session:nil callback:^(NSError *error, SPTTrack *object) {
                                 [tempArray replaceObjectAtIndex:i withObject:object];

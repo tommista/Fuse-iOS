@@ -19,10 +19,13 @@
 
 #define AROUND_ME 0
 #define HYPE_MACHINE 1
+#define SPOTIFY_FEATURED 2
 
 @interface DiscoveryViewController (){
     unsigned long descrCount;
+    unsigned long descrPlaylistCount;
     NSMutableArray *tempArray;
+    NSMutableArray *tempPlaylistArray;
     NSTimer *ppTimer;
 }
 @end
@@ -93,7 +96,7 @@
 }
 
 - (NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return 4;
+    return 3;
 }
 
 - (UITableViewCell *) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -114,6 +117,10 @@
         case HYPE_MACHINE:
             cell.textLabel.text = @"Hype Machine: Featured";
             cell.imageView.image = [UIImage imageNamed:@"heart.png"];
+            break;
+        case SPOTIFY_FEATURED:
+            cell.textLabel.text = @"Spotify: Featured";
+            cell.imageView.image = [UIImage imageNamed:@"feed3.png"];
             break;
     }
     
@@ -178,6 +185,22 @@
                 NSLog(@"Error: %@", error);
             }];
         }break;
+        case SPOTIFY_FEATURED:{
+            tempPlaylistArray = [[NSMutableArray alloc] init];
+            [SPTBrowse requestFeaturedPlaylistsForCountry:@"US" limit:25 offset:0 locale:nil timestamp:nil accessToken:_songManager.spotifyPlayer.session.accessToken callback:^(NSError *error, SPTFeaturedPlaylistList *list) {
+                NSArray *playlists = list.items;
+                descrPlaylistCount = playlists.count;
+                for(int i = 0; i < playlists.count; i++){
+                    SPTPartialPlaylist *playlist = [playlists objectAtIndex:i];
+                    [tempPlaylistArray addObject:[[NSString alloc] init]];
+                    [SPTPlaylistSnapshot playlistWithURI:playlist.uri session:_songManager.spotifyPlayer.session callback:^(NSError *error, SPTPlaylistSnapshot *snapshot) {
+                        SPTPartialTrack *track = [[[snapshot firstTrackPage] items] firstObject];
+                        [tempPlaylistArray replaceObjectAtIndex:i withObject:track];
+                        [self decrementPlaylistCount];
+                    }];
+                }
+            }];
+        }break;
     }
 }
 
@@ -195,7 +218,16 @@
         vc.playlist = tempArray;
         [self.navigationController pushViewController:vc animated:YES];
     }
-    
+}
+
+- (void) decrementPlaylistCount{
+    descrPlaylistCount--;
+    if(descrPlaylistCount == 0){
+        GenericPlaylistViewController *vc = [[GenericPlaylistViewController alloc] init];
+        vc.playlistName = @"Featured";
+        vc.playlist = tempPlaylistArray;
+        [self.navigationController pushViewController:vc animated:YES];
+    }
 }
 
 @end

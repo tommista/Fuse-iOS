@@ -72,7 +72,7 @@
         SPTPartialTrack *spTrack = (SPTPartialTrack *) track;
         playingSource = SPOTIFY_PLAYING;
         [self sentIDToParse:spTrack.uri.absoluteString];
-        uuid = spTrack.uri;
+        uuid = spTrack.uri.absoluteString;
         [_spotifyPlayer playSong:spTrack.uri];
     }else if ([[track class] isSubclassOfClass:[SoundcloudTrack class]]){// soundcloud track
         SoundcloudTrack *scTrack = (SoundcloudTrack *) track;

@@ -75,13 +75,26 @@
 
 - (void) newSong:(NSNotification *)notif{
     NSString *uuid = [notif.userInfo objectForKey:@"id"];
-    for(int i = 0; i < playlist.count; i++){
+    for(int i = 0; i < _savedPlaylistManager.savedPlaylist.count; i++){
         id track = [_savedPlaylistManager.savedPlaylist objectAtIndex:i];
+        NSString *trackId = @"";;
         if([[track class] isSubclassOfClass:[SPTPartialTrack class]]){// spotify track
             SPTPartialTrack *spTrack = (SPTPartialTrack *) track;
+            trackId = spTrack.uri.absoluteString;
         }else if ([[track class] isSubclassOfClass:[SoundcloudTrack class]]){// soundcloud track
             SoundcloudTrack *scTrack = (SoundcloudTrack *) track;
-        }else{
+            trackId = scTrack.trackId;
+        }else if([[track class] isSubclassOfClass:[GenericTrack class]]){
+            GenericTrack *gTrack = (GenericTrack *) track;
+            NSArray *parts = [gTrack.trackURL.absoluteString componentsSeparatedByString:@"/"];
+            trackId = [parts objectAtIndex:4];
+        }
+        
+        if([trackId isEqualToString:uuid] && i != selectedRow){
+            [_tableView deselectRowAtIndexPath:[NSIndexPath indexPathForRow:selectedRow inSection:0] animated:YES];
+            [_tableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:0] animated:YES scrollPosition:UITableViewScrollPositionNone];
+            selectedRow = i;
+            return;
         }
     }
 }

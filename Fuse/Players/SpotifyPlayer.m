@@ -43,6 +43,8 @@
         //NSURL *trackURI = [NSURL URLWithString:@"spotify:track:58s6EuEYJdlb0kO7awm3Vp"];
         //[self playSong:trackURI];
     }];
+    
+    NSLog(@"Heres your token: %@, ", session.accessToken);
 }
 
 - (void) playSong:(NSURL *)songURL{
